@@ -77,10 +77,10 @@
     --border-medium: #475569;
     
     /* Dark mode code block colors - proper dark theme */
-    --code-bg: #1e293b;
-    --code-bg-secondary: #334155;
-    --code-text: #f1f5f9;
-    --code-border: #475569;
+    --code-bg: #1e293b !important;
+    --code-bg-secondary: #334155 !important;
+    --code-text: #f1f5f9 !important;
+    --code-border: #475569 !important;
     --code-comment: #94a3b8;
     --code-keyword: #a78bfa;
     --code-string: #34d399;
