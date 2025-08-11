@@ -1,1775 +1,285 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-:root {
-    /* Light theme colors */
-    --bg-primary: #ffffff;
-    --bg-secondary: #f8fafc;
-    --bg-tertiary: #f1f5f9;
-    --text-primary: #1e293b;
-    --text-secondary: #64748b;
-    --text-tertiary: #94a3b8;
-    --border-light: #e2e8f0;
-    --border-medium: #cbd5e1;
-    
-    /* Brand colors */
-    --blue-50: #eff6ff;
-    --blue-500: #3b82f6;
-    --blue-600: #2563eb;
-    --blue-700: #1d4ed8;
-    --blue-900: #1e3a8a;
-    
-    /* Semantic colors */
-    --success: #10b981;
-    --warning: #f59e0b;
-    --error: #ef4444;
-    
-    /* Light mode code block colors */
-    --code-bg: #f8fafc;
-    --code-bg-secondary: #f1f5f9;
-    --code-text: #1e293b;
-    --code-border: #e2e8f0;
-    --code-comment: #64748b;
-    --code-keyword: #7c3aed;
-    --code-string: #059669;
-    --code-number: #dc2626;
-    
-    /* Shadows */
-    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-    
-    /* Spacing */
-    --spacing-xs: 0.25rem;
-    --spacing-sm: 0.5rem;
-    --spacing-md: 1rem;
-    --spacing-lg: 1.5rem;
-    --spacing-xl: 2rem;
-    --spacing-2xl: 3rem;
-    --spacing-3xl: 4rem;
-    
-    /* Typography */
-    --font-family-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    --font-family-mono: 'JetBrains Mono', 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
-    
-    /* Transitions */
-    --transition-fast: 0.15s ease-in-out;
-    --transition-normal: 0.2s ease-in-out;
-    --transition-slow: 0.3s ease-in-out;
-    
-    /* GitHub icon filter */
-    --github-icon-filter: brightness(0) saturate(100%) invert(45%) sepia(8%) saturate(1037%) hue-rotate(202deg) brightness(95%) contrast(87%);
-}
-
-/* Dark theme */
-[data-theme="dark"] {
-    --bg-primary: #0f172a;
-    --bg-secondary: #1e293b;
-    --bg-tertiary: #334155;
-    --text-primary: #f1f5f9;
-    --text-secondary: #cbd5e1;
-    --text-tertiary: #94a3b8;
-    --border-light: #334155;
-    --border-medium: #475569;
-    
-    /* Dark mode code block colors - proper dark theme */
-    --code-bg: #1e293b !important;
-    --code-bg-secondary: #334155 !important;
-    --code-text: #f1f5f9 !important;
-    --code-border: #475569 !important;
-    --code-comment: #94a3b8;
-    --code-keyword: #a78bfa;
-    --code-string: #34d399;
-    --code-number: #fca5a5;
-    
-    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
-    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4);
-    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.4);
-    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.4), 0 8px 10px -6px rgb(0 0 0 / 0.4);
-    
-    --github-icon-filter: brightness(0) saturate(100%) invert(85%) sepia(8%) saturate(292%) hue-rotate(202deg) brightness(102%) contrast(93%);
-}
-
-/* Base styles */
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    font-family: var(--font-family-sans);
-    background-color: var(--bg-primary);
-    color: var(--text-primary);
-    line-height: 1.6;
-    font-size: 16px;
-    transition: background-color var(--transition-normal), color var(--transition-normal);
-    overflow-x: hidden;
-}
-
-/* Typography */
-h1, h2, h3, h4, h5, h6 {
-    font-weight: 600;
-    line-height: 1.25;
-    margin-bottom: var(--spacing-md);
-    word-wrap: break-word;
-}
-
-h1 { font-size: 2.5rem; }
-h2 { font-size: 2rem; }
-h3 { font-size: 1.5rem; }
-h4 { font-size: 1.25rem; }
-h5 { font-size: 1.125rem; }
-h6 { font-size: 1rem; }
-
-p {
-    margin-bottom: var(--spacing-md);
-    word-wrap: break-word;
-}
-
-a {
-    color: var(--blue-600);
-    text-decoration: none;
-    transition: color var(--transition-fast);
-}
-
-a:hover {
-    color: var(--blue-700);
-}
-
-.keyword { color: blue; font-weight: bold; }
-.string { color: brown; }
-.comment { color: green; font-style: italic; }
-
-/* Container */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 var(--spacing-lg);
-    width: 100%;
-}
-
-/* Navigation */
-.navbar {
-    background-color: var(--bg-primary);
-    border-bottom: 1px solid var(--border-light);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    backdrop-filter: blur(10px);
-    transition: all var(--transition-normal);
-}
-
-.nav-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: var(--spacing-md) var(--spacing-lg);
-    max-width: 1200px;
-    margin: 0 auto;
-    width: 100%;
-    position: relative;
-    height: 73px;
-}
-
-.nav-logo {
-    display: flex;
-    align-items: center;
-    font-weight: 700;
-    font-size: 1.25rem;
-    color: var(--text-primary);
-    z-index: 1001;
-}
-
-.nav-logo a {
-    display: flex;
-    align-items: center;
-    color: inherit;
-    min-height: 44px;
-    min-width: 44px;
-    justify-content: flex-start;
-}
-
-.logo-full {
-    width: 150px; 
-    height: auto;  
-    display: block;
-}
-
-.logo-icon {
-    height: 32px;
-    width: auto;
-    display: none;
-}
-
-.nav-links {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-xl);
-}
-
-.nav-link {
-    color: var(--text-secondary);
-    font-weight: 500;
-    padding: var(--spacing-sm) 0;
-    border-bottom: 2px solid transparent;
-    transition: all var(--transition-fast);
-}
-
-.nav-link:hover {
-    color: var(--text-primary);
-    border-bottom-color: var(--blue-500);
-}
-
-.nav-actions {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-md);
-    z-index: 1001;
-}
-
-.theme-toggle, 
-.github-btn, 
-.mobile-sidebar-toggle {
-    background: none;
-    border: 2px solid var(--border-light);
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all var(--transition-fast);
-    flex-shrink: 0;
-}
-
-.theme-toggle:hover, 
-.github-btn:hover, 
-.mobile-sidebar-toggle:hover {
-    border-color: var(--blue-500);
-    background-color: var(--blue-50);
-}
-
-[data-theme="dark"] .theme-toggle:hover,
-[data-theme="dark"] .github-btn:hover,
-[data-theme="dark"] .mobile-sidebar-toggle:hover {
-    background-color: var(--blue-900);
-}
-
-.theme-icon {
-    font-size: 1.2rem;
-}
-
-.github-btn svg {
-    width: 20px;
-    height: 20px;
-    filter: var(--github-icon-filter);
-}
-
-.mobile-menu-toggle {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-    padding: var(--spacing-sm);
-    gap: 4px;
-    background: none;
-    border: none;
-    flex-shrink: 0;
-    width: 40px;
-    height: 40px;
-    align-items: center;
-    justify-content: center;
-}
-
-.mobile-menu-toggle span {
-    width: 20px;
-    height: 2px;
-    background-color: var(--text-primary);
-    transition: all var(--transition-fast);
-    border-radius: 1px;
-}
-
-.mobile-menu-toggle.active span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
-}
-
-.mobile-menu-toggle.active span:nth-child(2) {
-    opacity: 0;
-}
-
-.mobile-menu-toggle.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -6px);
-}
-
-.mobile-sidebar-toggle {
-    display: none;
-}
-
-.mobile-nav {
-    display: none;
-    position: fixed;
-    top: 73px;
-    left: 0;
-    right: 0;
-    background-color: var(--bg-primary);
-    border-bottom: 1px solid var(--border-light);
-    box-shadow: var(--shadow-lg);
-    z-index: 999;
-    max-height: calc(100vh - 73px);
-    overflow-y: auto;
-    transform: translateY(-100%);
-    transition: all var(--transition-normal);
-    opacity: 0;
-    visibility: hidden;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-}
-
-.mobile-nav.open {
-    display: block;
-    transform: translateY(0);
-    opacity: 1;
-    visibility: visible;
-}
-
-.mobile-nav-content {
-    padding: var(--spacing-lg);
-}
-
-.mobile-nav-links {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-md);
-    margin-bottom: var(--spacing-lg);
-}
-
-.mobile-nav-link {
-    color: var(--text-secondary);
-    font-weight: 500;
-    padding: var(--spacing-md);
-    border-radius: 8px;
-    transition: all var(--transition-fast);
-    text-align: left;
-    border-left: 3px solid transparent;
-}
-
-.mobile-nav-link:hover {
-    color: var(--text-primary);
-    background-color: var(--bg-secondary);
-    border-left-color: var(--blue-500);
-}
-
-.mobile-nav-buttons {
-    display: flex;
-    justify-content: center;
-    gap: var(--spacing-md);
-    padding-top: var(--spacing-lg);
-    border-top: 1px solid var(--border-light);
-}
-
-.mobile-nav-buttons .theme-toggle {
-    width: 44px;
-    height: 44px;
-}
-
-/* Buttons */
-.btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: var(--spacing-md) var(--spacing-xl);
-    border-radius: 8px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all var(--transition-fast);
-    border: 2px solid transparent;
-    cursor: pointer;
-    font-size: 1rem;
-    white-space: nowrap;
-    min-height: 44px;
-}
-
-.btn-primary {
-    background-color: var(--blue-600);
-    color: white;
-    box-shadow: var(--shadow-md);
-}
-
-.btn-primary:hover {
-    background-color: var(--blue-700);
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-lg);
-    color: white;
-}
-
-.btn-secondary {
-    background-color: var(--bg-primary);
-    color: var(--text-primary);
-    border-color: var(--border-medium);
-}
-
-.btn-secondary:hover {
-    background-color: var(--bg-tertiary);
-    transform: translateY(-1px);
-    color: var(--text-primary);
-}
-
-.btn-large {
-    padding: var(--spacing-lg) var(--spacing-2xl);
-    font-size: 1.125rem;
-}
-
-/* Hero Section */
-.hero {
-    background: linear-gradient(135deg, var(--blue-50) 0%, var(--bg-secondary) 100%);
-    padding: var(--spacing-3xl) 0;
-    min-height: auto;
-}
-
-[data-theme="dark"] .hero {
-    background: linear-gradient(135deg, var(--blue-900) 0%, var(--bg-secondary) 100%);
-}
-
-.hero-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 var(--spacing-lg);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--spacing-3xl);
-    align-items: center;
-}
-
-.hero-content {
-    display: flex;
-    flex-direction: column;
-}
-
-.hero-title {
-    font-size: 3rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    margin-bottom: var(--spacing-lg);
-    line-height: 1.1;
-}
-
-.hero-subtitle {
-    display: block;
-    font-size: 1.5rem;
-    color: var(--blue-600);
-    font-weight: 600;
-}
-
-.hero-description {
-    font-size: 1.125rem;
-    color: var(--text-secondary);
-    margin-bottom: var(--spacing-xl);
-    line-height: 1.7;
-}
-
-.hero-buttons {
-    display: flex;
-    gap: var(--spacing-md);
-    flex-wrap: wrap;
-}
-
-/* Code Block - REALLY Fixed for dark mode */
-.code-block {
-    background-color: var(--code-bg) !important;
-    border: 1px solid var(--code-border) !important;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: var(--shadow-lg);
-    width: 100%;
-    margin: var(--spacing-md) 0;
-}
-
-[data-theme="dark"] .code-block {
-    background-color: #1e293b !important;
-    border-color: #475569 !important;
-}
-
-.code-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: var(--spacing-md) var(--spacing-lg);
-    background-color: var(--code-bg-secondary) !important;
-    border-bottom: 1px solid var(--code-border) !important;
-}
-
-[data-theme="dark"] .code-header {
-    background-color: #334155 !important;
-    border-bottom-color: #475569 !important;
-}
-
-.code-lang {
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: var(--code-text);
-}
-
-.copy-btn {
-    background: var(--code-bg);
-    border: 1px solid var(--code-border);
-    color: var(--code-text);
-    padding: var(--spacing-xs) var(--spacing-md);
-    border-radius: 6px;
-    font-size: 0.75rem;
-    cursor: pointer;
-    transition: all var(--transition-fast);
-    min-height: 32px;
-    font-weight: 500;
-}
-
-.copy-btn:hover {
-    background-color: var(--blue-50);
-    border-color: var(--blue-500);
-    color: var(--blue-600);
-}
-
-[data-theme="dark"] .copy-btn:hover {
-    background-color: var(--blue-900);
-    border-color: var(--blue-500);
-    color: var(--blue-400);
-}
-
-.code-block pre {
-    margin: 0;
-    padding: var(--spacing-lg);
-    overflow-x: auto;
-    font-family: var(--font-family-mono);
-    font-size: 0.875rem;
-    line-height: 1.5;
-    background-color: var(--code-bg) !important;
-    scrollbar-width: thin;
-    scrollbar-color: var(--border-medium) transparent;
-}
-
-[data-theme="dark"] .code-block pre {
-    background-color: #1e293b !important;
-}
-
-.code-block pre::-webkit-scrollbar {
-    height: 6px;
-}
-
-.code-block pre::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-.code-block pre::-webkit-scrollbar-thumb {
-    background-color: var(--border-medium);
-    border-radius: 3px;
-}
-
-.code-block pre::-webkit-scrollbar-thumb:hover {
-    background-color: var(--border-light);
-}
-
-.code-block code {
-    color: var(--code-text) !important;
-    font-family: var(--font-family-mono);
-    background: transparent;
-    padding: 0;
-    border-radius: 0;
-    font-size: inherit;
-    display: block;
-    white-space: pre;
-    word-wrap: normal;
-    overflow-wrap: normal;
-}
-
-[data-theme="dark"] .code-block code {
-    color: #f1f5f9 !important;
-}
-
-/* Syntax highlighting */
-.code-block .keyword {
-    color: var(--code-keyword);
-    font-weight: 600;
-}
-
-.code-block .string {
-    color: var(--code-string);
-}
-
-.code-block .comment {
-    color: var(--code-comment);
-    font-style: italic;
-}
-
-.code-block .number {
-    color: var(--code-number);
-}
-
-/* Inline code */
-.inline-code {
-    background-color: var(--code-bg-secondary);
-    color: var(--code-text);
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-family: var(--font-family-mono);
-    font-size: 0.875rem;
-    border: 1px solid var(--code-border);
-}
-
-/* Features Section */
-.features {
-    padding: var(--spacing-3xl) 0;
-    background-color: var(--bg-secondary);
-}
-
-.section-title {
-    text-align: center;
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: var(--spacing-3xl);
-    color: var(--text-primary);
-}
-
-.features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--spacing-xl);
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 var(--spacing-lg);
-}
-
-.feature-card {
-    background-color: var(--bg-primary);
-    padding: var(--spacing-xl);
-    border-radius: 12px;
-    box-shadow: var(--shadow-md);
-    transition: all var(--transition-normal);
-    border: 1px solid var(--border-light);
-}
-
-.feature-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-xl);
-}
-
-.feature-icon {
-    font-size: 2.5rem;
-    margin-bottom: var(--spacing-md);
-    width: 48px;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--blue-50);
-    border-radius: 12px;
-    color: var(--blue-600);
-}
-
-[data-theme="dark"] .feature-icon {
-    background-color: var(--blue-900);
-    color: var(--blue-400);
-}
-
-.feature-card h3 {
-    color: var(--text-primary);
-    margin-bottom: var(--spacing-md);
-}
-
-.feature-card p {
-    color: var(--text-secondary);
-    margin: 0;
-}
-
-/* Examples Section */
-.examples {
-    padding: var(--spacing-3xl) 0;
-}
-
-.examples-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: var(--spacing-xl);
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 var(--spacing-lg);
-}
-
-.example-card {
-    background-color: var(--bg-primary);
-    border: 1px solid var(--border-light);
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: var(--shadow-md);
-    transition: all var(--transition-normal);
-    width: 100%;
-}
-
-.example-card:hover {
-    box-shadow: var(--shadow-lg);
-}
-
-.example-card h3 {
-    padding: var(--spacing-lg);
-    margin: 0;
-    background-color: var(--bg-secondary);
-    border-bottom: 1px solid var(--border-light);
-}
-
-.example-card .code-block {
-    margin: 0;
-    border: none;
-    border-radius: 0;
-    box-shadow: none;
-}
-
-/* CTA Section */
-.cta {
-    padding: var(--spacing-3xl) 0;
-    background: linear-gradient(135deg, var(--blue-600) 0%, var(--blue-700) 100%);
-    text-align: center;
-}
-
-.cta-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 var(--spacing-lg);
-}
-
-.cta-content h2 {
-    color: white;
-    font-size: 2.5rem;
-    margin-bottom: var(--spacing-md);
-}
-
-.cta-content p {
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 1.125rem;
-    margin-bottom: var(--spacing-xl);
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.cta .btn-primary {
-    background-color: white;
-    color: var(--blue-600);
-}
-
-.cta .btn-primary:hover {
-    background-color: var(--bg-secondary);
-    color: var(--blue-700);
-}
-
-/* Footer */
-.footer {
-    background-color: var(--bg-tertiary);
-    padding: var(--spacing-2xl) 0;
-    border-top: 1px solid var(--border-light);
-}
-
-.footer-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: var(--spacing-lg);
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 var(--spacing-lg);
-}
-
-.footer-logo {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-md);
-    font-weight: 600;
-    color: var(--text-primary);
-}
-
-.footer-logo-img {
-    height: 24px;
-}
-
-.footer-links {
-    display: flex;
-    gap: var(--spacing-xl);
-}
-
-.footer-links a {
-    color: var(--text-secondary);
-    transition: color var(--transition-fast);
-}
-
-.footer-links a:hover {
-    color: var(--blue-600);
-}
-
-.footer-bottom {
-    text-align: center;
-    padding-top: var(--spacing-lg);
-    border-top: 1px solid var(--border-light);
-    max-width: 1200px;
-    margin: 0 auto;
-    padding-left: var(--spacing-lg);
-    padding-right: var(--spacing-lg);
-}
-
-.footer-bottom p {
-    color: var(--text-tertiary);
-    margin: 0;
-    font-size: 0.875rem;
-}
-
-/* Documentation Styles */
-.docs-container {
-    display: flex;
-    min-height: calc(100vh - 73px);
-    margin-top: 0;
-}
-
-.docs-sidebar {
-    width: 300px;
-    background-color: var(--bg-secondary);
-    border-right: 1px solid var(--border-light);
-    padding: var(--spacing-lg);
-    overflow-y: auto;
-    position: sticky;
-    top: 73px;
-    height: calc(100vh - 73px);
-    transition: all var(--transition-normal);
-    flex-shrink: 0;
-}
-
-.sidebar-content {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-lg);
-}
-
-.search-box {
-    position: relative;
-}
-
-.search-input {
-    width: 100%;
-    padding: var(--spacing-md);
-    border: 1px solid var(--border-medium);
-    border-radius: 8px;
-    background-color: var(--bg-primary);
-    color: var(--text-primary);
-    font-size: 0.875rem;
-    transition: all var(--transition-fast);
-}
-
-.search-input:focus {
-    outline: none;
-    border-color: var(--blue-500);
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-}
-
-.sidebar-nav {
-    display: flex;
-    flex-direction: column;
-}
-
-.nav-section {
-    margin-bottom: var(--spacing-lg);
-}
-
-.nav-section-title {
-    font-weight: 600;
-    color: var(--text-primary);
-    margin-bottom: var(--spacing-sm);
-    font-size: 0.875rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-
-.nav-items {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-xs);
-}
-
-.nav-item {
-    color: var(--text-secondary);
-    padding: var(--spacing-sm) var(--spacing-md);
-    border-radius: 6px;
-    font-size: 0.875rem;
-    transition: all var(--transition-fast);
-    cursor: pointer;
-    border-left: 2px solid transparent;
-}
-
-.nav-item:hover {
-    color: var(--text-primary);
-    background-color: var(--bg-primary);
-    border-left-color: var(--blue-500);
-}
-
-.nav-item.active {
-    color: var(--blue-600);
-    background-color: var(--blue-50);
-    border-left-color: var(--blue-500);
-    font-weight: 500;
-}
-
-[data-theme="dark"] .nav-item.active {
-    background-color: var(--blue-900);
-    color: var(--blue-400);
-}
-
-.nav-subsection {
-    margin-left: var(--spacing-md);
-    padding-left: var(--spacing-md);
-    border-left: 1px solid var(--border-light);
-}
-
-.docs-main {
-    flex: 1;
-    overflow-y: auto;
-    min-width: 0;
-}
-
-.docs-content {
-    max-width: 800px;
-    padding: var(--spacing-2xl);
-    margin: 0 auto;
-    width: 100%;
-}
-
-.docs-content h1 {
-    color: var(--text-primary);
-    margin-bottom: var(--spacing-lg);
-    padding-bottom: var(--spacing-md);
-    border-bottom: 2px solid var(--border-light);
-}
-
-.docs-content h2 {
-    color: var(--text-primary);
-    margin-top: var(--spacing-2xl);
-    margin-bottom: var(--spacing-lg);
-}
-
-.docs-content h3 {
-    color: var(--text-primary);
-    margin-top: var(--spacing-xl);
-    margin-bottom: var(--spacing-md);
-}
-
-.docs-content p {
-    color: var(--text-secondary);
-    line-height: 1.7;
-}
-
-.docs-content ul, 
-.docs-content ol {
-    margin-bottom: var(--spacing-md);
-    padding-left: var(--spacing-xl);
-}
-
-.docs-content li {
-    color: var(--text-secondary);
-    margin-bottom: var(--spacing-sm);
-}
-
-.docs-content strong {
-    color: var(--text-primary);
-    font-weight: 600;
-}
-
-.docs-content blockquote {
-    border-left: 4px solid var(--blue-500);
-    padding-left: var(--spacing-lg);
-    margin: var(--spacing-lg) 0;
-    background-color: var(--bg-secondary);
-    padding: var(--spacing-md) var(--spacing-lg);
-    border-radius: 0 8px 8px 0;
-}
-
-.docs-content hr {
-    border: none;
-    height: 1px;
-    background-color: var(--border-light);
-    margin: var(--spacing-xl) 0;
-}
-
-.sidebar-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1100;
-}
-
-.sidebar-overlay.show {
-    display: block;
-}
-
-/* Loading states */
-.loading-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: var(--spacing-3xl);
-    text-align: center;
-}
-
-.loading-spinner {
-    margin-bottom: var(--spacing-lg);
-}
-
-.spinner {
-    width: 40px;
-    height: 40px;
-    border: 4px solid var(--border-light);
-    border-top: 4px solid var(--blue-500);
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-.loading-text {
-    color: var(--text-secondary);
-    font-size: 1.125rem;
-}
-
-/* Error states */
-.error-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: var(--spacing-3xl);
-    text-align: center;
-}
-
-.error-icon {
-    font-size: 4rem;
-    margin-bottom: var(--spacing-lg);
-}
-
-.error-message {
-    color: var(--text-secondary);
-    font-size: 1.125rem;
-    margin-bottom: var(--spacing-xl);
-}
-
-.retry-button {
-    background-color: var(--blue-600);
-    color: white;
-    border: none;
-    padding: var(--spacing-md) var(--spacing-xl);
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all var(--transition-fast);
-}
-
-.retry-button:hover {
-    background-color: var(--blue-700);
-}
-
-/* Search states */
-.search-empty-state {
-    padding: var(--spacing-lg);
-    text-align: center;
-    display: none;
-}
-
-.empty-state-content p {
-    color: var(--text-secondary);
-    margin-bottom: var(--spacing-sm);
-}
-
-.empty-state-content small {
-    color: var(--text-tertiary);
-    font-size: 0.8rem;
-}
-
-.search-highlight {
-    background-color: var(--blue-50);
-}
-
-[data-theme="dark"] .search-highlight {
-    background-color: var(--blue-900);
-}
-
-/* Mobile navigation buttons */
-.mobile-nav-buttons {
-    display: flex;
-    gap: var(--spacing-md);
-    margin-top: var(--spacing-xl);
-    padding-top: var(--spacing-lg);
-    border-top: 1px solid var(--border-light);
-}
-
-.nav-button {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-md);
-    padding: var(--spacing-md);
-    background-color: var(--bg-secondary);
-    border: 1px solid var(--border-light);
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all var(--transition-fast);
-    text-decoration: none;
-    color: var(--text-primary);
-}
-
-.nav-button:hover {
-    background-color: var(--bg-tertiary);
-    border-color: var(--blue-500);
-}
-
-.nav-button-icon {
-    font-size: 1.25rem;
-    color: var(--blue-600);
-}
-
-.nav-button-text {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.nav-button-text small {
-    color: var(--text-tertiary);
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-
-.nav-button-text span {
-    color: var(--text-primary);
-    font-weight: 500;
-}
-
-.prev-button {
-    justify-content: flex-start;
-}
-
-.next-button {
-    justify-content: flex-end;
-    flex-direction: row-reverse;
-}
-
-.next-button .nav-button-text {
-    align-items: flex-end;
-}
-
-@media (max-width: 768px) {
-  .hero-code {
-    display: none;
-  }
-}
-
-
-/* Responsive Design - Tablet */
-@media (max-width: 1024px) {
-    .features-grid {
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: var(--spacing-lg);
-    }
-    
-    .examples-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .code-block pre {
-        font-size: 0.8rem;
-        padding: var(--spacing-md);
-    }
-    
-    .code-header {
-        padding: var(--spacing-sm) var(--spacing-md);
-    }
-    
-    .copy-btn {
-        font-size: 0.7rem;
-        padding: var(--spacing-xs) var(--spacing-sm);
-    }
-}
-
-/* Mobile Responsive Design */
-@media (max-width: 768px) {
-    /* Navigation fixes */
-    .nav-links {
-        display: none;
-    }
-    
-    .mobile-menu-toggle {
-        display: flex;
-    }
-    
-    .mobile-sidebar-toggle {
-        display: flex;
-    }
-    
-    .nav-container {
-        padding: var(--spacing-md);
-        height: 73px;
-    }
-    
-    .logo-full {
-        display: none;
-    }
-    
-    .logo-icon {
-        display: block;
-        height: 40px;
-        width: auto;
-    }
-    
-    /* Mobile navigation positioning */
-    .mobile-nav {
-        top: 73px;
-        display: block;
-        transform: translateY(-100%);
-        opacity: 0;
-        visibility: hidden;
-        transition: all var(--transition-normal);
-    }
-    
-    .mobile-nav.open {
-        transform: translateY(0);
-        opacity: 1;
-        visibility: visible;
-    }
-    
-    /* Documentation page specific */
-    .docs-container {
-        margin-top: 0;
-    }
-    
-    .docs-sidebar {
-        position: fixed;
-        top: 73px;
-        left: -100%;
-        width: 100%;
-        max-width: 320px;
-        height: calc(100vh - 73px);
-        z-index: 1200;
-        transition: left var(--transition-normal);
-        box-shadow: var(--shadow-xl);
-    }
-    
-    .docs-sidebar.open {
-        left: 0;
-    }
-    
-    .sidebar-overlay {
-        z-index: 1100;
-    }
-    
-    .sidebar-overlay.show {
-        display: block;
-    }
-    
-    /* Hero section fixes */
-    .hero {
-        padding: var(--spacing-2xl) 0;
-    }
-    
-    .hero-container {
-        grid-template-columns: 1fr;
-        gap: var(--spacing-xl);
-        text-align: center;
-        padding: 0 var(--spacing-md);
-    }
-    
-    .hero-title {
-        font-size: 2.25rem;
-        margin-bottom: var(--spacing-md);
-    }
-    
-    .hero-subtitle {
-        font-size: 1.125rem;
-    }
-    
-    .hero-description {
-        font-size: 1rem;
-        margin-bottom: var(--spacing-lg);
-    }
-    
-    .hero-buttons {
-        justify-content: center;
-        flex-direction: column;
-        align-items: center;
-        gap: var(--spacing-sm);
-    }
-    
-    .hero-buttons .btn {
-        width: 100%;
-        max-width: 300px;
-    }
-    
-    /* Features section fixes */
-    .features {
-        padding: var(--spacing-2xl) 0;
-    }
-    
-    .features-grid {
-        grid-template-columns: 1fr;
-        gap: var(--spacing-lg);
-        padding: 0 var(--spacing-md);
-    }
-    
-    .feature-card {
-        padding: var(--spacing-lg);
-    }
-    
-    /* Examples section fixes */
-    .examples {
-        padding: var(--spacing-2xl) 0;
-    }
-    
-    .examples-grid {
-        grid-template-columns: 1fr;
-        gap: var(--spacing-lg);
-        padding: 0 var(--spacing-md);
-    }
-    
-    .example-card {
-        min-width: 0;
-        width: 100%;
-    }
-    
-    /* Enhanced Code block fixes for mobile */
-    .code-header {
-        padding: var(--spacing-sm) var(--spacing-md);
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        gap: var(--spacing-sm);
-    }
-    
-    .code-lang {
-        font-size: 0.75rem;
-        font-weight: 700;
-    }
-    
-    .copy-btn {
-        font-size: 0.65rem;
-        padding: 4px 8px;
-        min-height: 28px;
-        border-radius: 4px;
-        font-weight: 600;
-    }
-    
-    .code-block {
-        border-radius: 8px;
-        margin: var(--spacing-sm) 0;
-    }
-    
-    .code-block pre {
-        padding: var(--spacing-md);
-        font-size: 0.75rem;
-        line-height: 1.4;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-    }
-    
-    .code-block code {
-        font-size: 0.75rem;
-        white-space: pre;
-        word-break: normal;
-        overflow-wrap: normal;
-    }
-    
-    /* Improve scrollbar for mobile */
-    .code-block pre::-webkit-scrollbar {
-        height: 4px;
-    }
-    
-    .code-block pre::-webkit-scrollbar-thumb {
-        background-color: var(--border-medium);
-        border-radius: 2px;
-    }
-    
-    /* CTA section fixes */
-    .cta {
-        padding: var(--spacing-2xl) 0;
-    }
-    
-    .cta-content {
-        padding: 0 var(--spacing-md);
-    }
-    
-    .cta-content h2 {
-        font-size: 2rem;
-    }
-    
-    .cta-content p {
-        font-size: 1rem;
-    }
-    
-    /* Footer fixes */
-    .footer-content {
-        flex-direction: column;
-        gap: var(--spacing-lg);
-        text-align: center;
-        padding: 0 var(--spacing-md);
-        margin-bottom: var(--spacing-lg);
-    }
-    
-    .footer-links {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: var(--spacing-lg);
-    }
-    
-    .footer-bottom {
-        padding: var(--spacing-lg) var(--spacing-md) 0;
-    }
-    
-    .docs-content {
-        padding: var(--spacing-lg) var(--spacing-md);
-    }
-    
-    /* Typography fixes */
-    .section-title {
-        font-size: 2rem;
-        margin-bottom: var(--spacing-2xl);
-    }
-    
-    /* Button fixes */
-    .btn {
-        min-height: 48px;
-        padding: var(--spacing-md) var(--spacing-lg);
-        font-size: 0.95rem;
-    }
-    
-    .btn-large {
-        padding: var(--spacing-lg) var(--spacing-xl);
-        font-size: 1rem;
-    }
-    
-    /* Container padding fixes */
-    .container {
-        padding: 0 var(--spacing-md);
-    }
-    
-    /* Mobile navigation buttons */
-    .mobile-nav-buttons {
-        flex-direction: column;
-        gap: var(--spacing-sm);
-    }
-    
-    .nav-button {
-        width: 100%;
-    }
-}
-
-/* Extra small mobile screens */
-@media (max-width: 480px) {
-    .nav-container {
-        padding: var(--spacing-sm) var(--spacing-md);
-    }
-    
-    .logo-icon {
-        height: 36px;
-    }
-    
-    .theme-toggle, 
-    .github-btn {
-        width: 36px;
-        height: 36px;
-    }
-    
-    .mobile-menu-toggle {
-        padding: var(--spacing-xs);
-    }
-    
-    /* Hero section for very small screens */
-    .hero {
-        padding: var(--spacing-xl) 0;
-    }
-    
-    .hero-container {
-        padding: 0 var(--spacing-sm);
-    }
-    
-    .hero-title {
-        font-size: 1.875rem;
-        line-height: 1.2;
-    }
-    
-    .hero-subtitle {
-        font-size: 1rem;
-    }
-    
-    .hero-description {
-        font-size: 0.95rem;
-    }
-    
-    /* Typography adjustments */
-    .section-title {
-        font-size: 1.75rem;
-    }
-    
-    h1 { font-size: 1.875rem; }
-    h2 { font-size: 1.5rem; }
-    h3 { font-size: 1.25rem; }
-    
-    /* Button adjustments */
-    .btn {
-        padding: var(--spacing-sm) var(--spacing-lg);
-        font-size: 0.875rem;
-        min-height: 44px;
-    }
-    
-    .btn-large {
-        padding: var(--spacing-md) var(--spacing-lg);
-        font-size: 0.95rem;
-    }
-    
-    /* Feature cards */
-    .feature-card {
-        padding: var(--spacing-md);
-    }
-    
-    .feature-icon {
-        width: 40px;
-        height: 40px;
-        font-size: 1.5rem;
-    }
-    
-    /* Enhanced Code blocks for extra small screens */
-    .code-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: var(--spacing-xs);
-        padding: var(--spacing-sm);
-    }
-    
-    .copy-btn {
-        align-self: flex-end;
-        font-size: 0.6rem;
-        padding: 3px 6px;
-        min-height: 24px;
-    }
-    
-    .code-block {
-        border-radius: 6px;
-    }
-    
-    .code-block pre {
-        padding: var(--spacing-sm);
-        font-size: 0.7rem;
-        line-height: 1.3;
-    }
-    
-    .code-block code {
-        font-size: 0.7rem;
-    }
-    
-    /* Documentation adjustments */
-    .docs-content {
-        padding: var(--spacing-md) var(--spacing-sm);
-    }
-    
-    .docs-content h1 {
-        font-size: 1.5rem;
-    }
-    
-    .docs-content h2 {
-        font-size: 1.25rem;
-    }
-    
-    /* CTA section */
-    .cta-content h2 {
-        font-size: 1.75rem;
-    }
-    
-    .cta-content p {
-        font-size: 0.95rem;
-    }
-    
-    /* Footer adjustments */
-    .footer {
-        padding: var(--spacing-xl) 0;
-    }
-    
-    .footer-content {
-        padding: 0 var(--spacing-sm);
-    }
-    
-    .footer-links {
-        gap: var(--spacing-md);
-    }
-    
-    .footer-bottom {
-        padding: var(--spacing-md) var(--spacing-sm) 0;
-    }
-    
-    /* Mobile sidebar adjustments */
-    .docs-sidebar {
-        max-width: 280px;
-    }
-    
-    .sidebar-content {
-        gap: var(--spacing-md);
-    }
-    
-    .search-input {
-        padding: var(--spacing-sm);
-    }
-    
-    /* Mobile navigation improvements */
-    .mobile-nav-links {
-        padding: var(--spacing-md);
-        gap: var(--spacing-sm);
-    }
-    
-    .mobile-nav-link {
-        padding: var(--spacing-sm) var(--spacing-md);
-    }
-    
-    .mobile-nav-buttons {
-        padding: var(--spacing-sm) 0 var(--spacing-md);
-        gap: var(--spacing-sm);
-    }
-    
-    .mobile-nav-buttons .theme-toggle,
-    .mobile-nav-buttons .github-btn {
-        width: 36px;
-        height: 36px;
-    }
-}
-
-/* Landscape orientation fixes for mobile */
-@media (max-width: 768px) and (orientation: landscape) {
-    .hero {
-        padding: var(--spacing-xl) 0;
-    }
-    
-    .features, 
-    .examples, 
-    .cta {
-        padding: var(--spacing-xl) 0;
-    }
-    
-    .hero-title {
-        font-size: 2rem;
-    }
-    
-    .section-title {
-        font-size: 1.75rem;
-        margin-bottom: var(--spacing-xl);
-    }
-    
-    /* Code blocks in landscape */
-    .code-block pre {
-        font-size: 0.7rem;
-        max-height: 200px;
-        overflow-y: auto;
-    }
-}
-
-/* High DPI screens adjustments */
-@media (min-resolution: 2dppx) {
-    .github-btn svg {
-        width: 18px;
-        height: 18px;
-    }
-    
-    /* Better code rendering on high DPI */
-    .code-block pre {
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-    }
-}
-
-/* Accessibility improvements */
-@media (prefers-reduced-motion: reduce) {
-    * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
-    
-    html {
-        scroll-behavior: auto;
-    }
-}
-
-/* Print styles */
-@media print {
-    .navbar,
-    .mobile-nav,
-    .docs-sidebar,
-    .sidebar-overlay,
-    .theme-toggle,
-    .github-btn,
-    .mobile-sidebar-toggle,
-    .mobile-menu-toggle,
-    .copy-btn {
-        display: none !important;
-    }
-    
-    .docs-main,
-    .docs-content {
-        width: 100% !important;
-        max-width: none !important;
-        padding: 0 !important;
-        margin: 0 !important;
-    }
-    
-    .code-block {
-        break-inside: avoid;
-        background: white !important;
-        border: 1px solid #000 !important;
-    }
-    
-    .code-block pre {
-        white-space: pre-wrap !important;
-        word-wrap: break-word !important;
-    }
-}
-
-/* Focus styles for better accessibility */
-.nav-link:focus,
-.mobile-nav-link:focus,
-.nav-item:focus,
-.btn:focus,
-.theme-toggle:focus,
-.github-btn:focus,
-.mobile-sidebar-toggle:focus,
-.mobile-menu-toggle:focus,
-.copy-btn:focus,
-.search-input:focus {
-    outline: 2px solid var(--blue-500);
-    outline-offset: 2px;
-}
-
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-    :root {
-        --border-light: #000000;
-        --border-medium: #000000;
-        --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.8);
-        --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.8), 0 2px 4px -2px rgb(0 0 0 / 0.8);
-        --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.8), 0 4px 6px -4px rgb(0 0 0 / 0.8);
-        --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.8), 0 8px 10px -6px rgb(0 0 0 / 0.8);
-    }
-    
-    .code-block {
-        border: 2px solid #000000;
-    }
-    
-    .btn {
-        border-width: 2px;
-    }
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebhookLib - Production-Quality Discord Webhook Library for Roblox</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://raw.githubusercontent.com/Bluezly/iconforgrowstock/refs/heads/main/eec925e4-7dc7-4d71-873e-754f2150cc25%20(1).png" type="image/png" />
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="WebhookLib - Production-Quality Discord Webhook Library for Roblox" />
+    <meta property="og:description" content="WebhookLib provides a complete suite of features for sending Discord webhook messages including rich embeds, player notifications, automatic rate limiting, and robust error handling." />
+    <meta property="og:image" content="https://raw.githubusercontent.com/Bluezly/iconforgrowstock/refs/heads/main/eec925e4-7dc7-4d71-873e-754f2150cc25%20(1).png" />
+    <meta property="og:url" content="https://WebhookLib.github.io" />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter card tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="WebhookLib - Production-Quality Discord Webhook Library for Roblox" />
+    <meta name="twitter:description" content="WebhookLib provides a complete suite of features for sending Discord webhook messages including rich embeds, player notifications, automatic rate limiting, and robust error handling." />
+    <meta name="twitter:image" content="https://raw.githubusercontent.com/Bluezly/iconforgrowstock/refs/heads/main/eec925e4-7dc7-4d71-873e-754f2150cc25%20(1).png" />
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <img src="https://github.com/Bluezly/iconforgrowstock/blob/main/eec925e4-7dc7-4d71-873e-754f2150cc25.png?raw=true" alt="WebhookLib" class="logo-full">
+                    <img src="https://raw.githubusercontent.com/Bluezly/iconforgrowstock/refs/heads/main/eec925e4-7dc7-4d71-873e-754f2150cc25%20(1).png" alt="WebhookLib" class="logo-icon">
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="#features" class="nav-link">Features</a>
+                <a href="docs.html" class="nav-link">Documentation</a>
+                <a href="#examples" class="nav-link">Examples</a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <svg class="theme-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"/>
+                        <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                    </svg>
+                </button>
+                <button class="github-btn" id="githubBtn" onclick="window.open('https://github.com/WebhookLib/WebhookLib', '_blank')" aria-label="View on GitHub">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </button>
+            </div>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle mobile menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <!-- Mobile Navigation -->
+        <div class="mobile-nav" id="mobileNav">
+            <div class="mobile-nav-content">
+                <div class="mobile-nav-links">
+                    <a href="#features" class="mobile-nav-link">Features</a>
+                    <a href="docs.html" class="mobile-nav-link">Documentation</a>
+                    <a href="#examples" class="mobile-nav-link">Examples</a>
+                </div>
+                <div class="mobile-nav-buttons">
+                    <button class="theme-toggle" id="mobileThemeToggle" aria-label="Toggle theme">
+                        <svg class="theme-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="5"/>
+                            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                        </svg>
+                    </button>
+                    <button class="github-btn" onclick="window.open('https://github.com/WebhookLib/WebhookLib', '_blank')" aria-label="View on GitHub">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Production-Quality Discord Webhooks
+                    <span class="hero-subtitle">for Roblox Server Environments</span>
+                </h1>
+                <p class="hero-description">
+                    WebhookLib provides a complete suite of features for sending Discord webhook messages including rich embeds, player notifications, automatic rate limiting, and robust error handling.
+                </p>
+                <div class="hero-buttons">
+                    <a href="docs.html" class="btn btn-primary">Get Started</a>
+                    <a href="#features" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+            <div class="hero-code">
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang">Lua</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre id="luaCodeBlock"><code>-- Minimal setup
+local WebhookLib = require(game.ReplicatedStorage.WebhookLib)
+local webhook = WebhookLib.new("YOUR_WEBHOOK_URL")
+
+-- Send a message
+webhook:SendMessage("Server started!")
+
+-- Send player join notification
+game.Players.PlayerAdded:Connect(function(player)
+    webhook:SendJoinMessage(player)
+end)</code></pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">Powerful Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+                            <line x1="9" y1="9" x2="9.01" y2="9"/>
+                            <line x1="15" y1="9" x2="15.01" y2="9"/>
+                        </svg>
+                    </div>
+                    <h3>Production Ready</h3>
+                    <p>Built for high-traffic Roblox games with robust error handling, automatic retries, and comprehensive logging.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                        </svg>
+                    </div>
+                    <h3>Rate Limiting</h3>
+                    <p>Optional automatic rate limiting with request queueing and exponential backoff to prevent Discord API limits.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                    </div>
+                    <h3>Player Tracking</h3>
+                    <p>Automatic player join/leave notifications with avatar thumbnails and DataStore-backed join count tracking.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                            <line x1="8" y1="21" x2="16" y2="21"/>
+                            <line x1="12" y1="17" x2="12" y2="21"/>
+                        </svg>
+                    </div>
+                    <h3>Rich Embeds</h3>
+                    <p>Send beautiful Discord embeds with automatic sanitization, text truncation, and profanity filtering.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                            <circle cx="12" cy="16" r="1"/>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                        </svg>
+                    </div>
+                    <h3>Thread Safe</h3>
+                    <p>Non-blocking operations that won't freeze your game with background processing and smart caching.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+                        </svg>
+                    </div>
+                    <h3>Easy Setup</h3>
+                    <p>Minimal configuration required with smart defaults. Just provide a webhook URL and you're ready to go.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Examples Section -->
+    <section class="examples" id="examples">
+        <div class="container">
+            <h2 class="section-title">Quick Examples</h2>
+            <div class="examples-grid">
+                <div class="example-card">
+                    <h3>Basic Usage</h3>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        </div>
+                        <pre><code>local WebhookLib = require(game.ReplicatedStorage.WebhookLib)
+local webhook = WebhookLib.new("https://discord.com/api/webhooks/...")
+
+webhook:SendMessage("Hello Discord!")</code></pre>
+                    </div>
+                </div>
+                
+                <div class="example-card">
+                    <h3>Rich Embed</h3>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        </div>
+                        <pre><code>webhook:SendEmbed({
+    title = "Game Statistics",
+    description = "Current server stats",
+    color = 0x0099ff,
+    fields = {
+        {name = "Players", value = "15", inline = true},
+        {name = "Uptime", value = "2 hours", inline = true}
+    }
+})</code></pre>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <h3>Player Events</h3>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        </div>
+                        <pre><code>-- Auto join/leave notifications
+game.Players.PlayerAdded:Connect(function(player)
+    webhook:SendJoinMessage(player)
+end)
+
+game.Players.PlayerRemoving:Connect(function(player)
+    webhook:SendLeaveMessage(player)
+end)</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Get Started?</h2>
+                <p>Check out the comprehensive documentation to learn how to integrate WebhookLib into your Roblox game.</p>
+                <a href="docs.html" class="btn btn-primary btn-large">View Documentation</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="https://raw.githubusercontent.com/Bluezly/iconforgrowstock/refs/heads/main/eec925e4-7dc7-4d71-873e-754f2150cc25%20(1).png" alt="WebhookLib" class="footer-logo-img">
+                    <span>WebhookLib</span>
+                </div>
+                <div class="footer-links">
+                    <a href="docs.html">Documentation</a>
+                    <a href="#features">Features</a>
+                    <a href="#examples">Examples</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 WebhookLib. Production-quality Discord webhook library for Roblox. by 
+                   <a href="https://www.bluezly.exid.me/" target="_blank" rel="noopener noreferrer">bluezly</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
