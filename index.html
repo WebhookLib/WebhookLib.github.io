@@ -1,67 +1,79 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WebhookLib - Production-Quality Discord Webhook Library for Roblox</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="icon" href="https://raw.githubusercontent.com/Bluezly/iconforgrowstock/refs/heads/main/eec925e4-7dc7-4d71-873e-754f2150cc25%20(1).png" type="image/png" />
+    <meta name="description" content="WebhookLib is a production-quality Discord webhook library specifically designed for Roblox Server environments with automatic rate limiting, player tracking, and rich embeds." />
     
     <!-- Open Graph Tags -->
-    <meta property="og:title" content="WebhookLib - Production-Quality Discord Webhook Library for Roblox" />
-    <meta property="og:description" content="WebhookLib provides a complete suite of features for sending Discord webhook messages including rich embeds, player notifications, automatic rate limiting, and robust error handling." />
+    <meta property="og:title" content="WebhookLib - Discord Webhook Library for Roblox" />
+    <meta property="og:description" content="Production-quality Discord webhook library with automatic rate limiting, player tracking, and rich embeds for Roblox games." />
     <meta property="og:image" content="https://raw.githubusercontent.com/Bluezly/iconforgrowstock/refs/heads/main/eec925e4-7dc7-4d71-873e-754f2150cc25%20(1).png" />
-    <meta property="og:url" content="https://WebhookLib.github.io" />
+    <meta property="og:url" content="https://webhooklib.github.io" />
     <meta property="og:type" content="website" />
-
-    <!-- Twitter card tags -->
+    
+    <!-- Twitter Card Tags -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="WebhookLib - Production-Quality Discord Webhook Library for Roblox" />
-    <meta name="twitter:description" content="WebhookLib provides a complete suite of features for sending Discord webhook messages including rich embeds, player notifications, automatic rate limiting, and robust error handling." />
+    <meta name="twitter:title" content="WebhookLib - Discord Webhook Library for Roblox" />
+    <meta name="twitter:description" content="Production-quality Discord webhook library with automatic rate limiting, player tracking, and rich embeds for Roblox games." />
     <meta name="twitter:image" content="https://raw.githubusercontent.com/Bluezly/iconforgrowstock/refs/heads/main/eec925e4-7dc7-4d71-873e-754f2150cc25%20(1).png" />
-</head>
-<body>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="https://raw.githubusercontent.com/Bluezly/iconforgrowstock/refs/heads/main/eec925e4-7dc7-4d71-873e-754f2150cc25%20(1).png" type="image/png" />
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="src/styles.css">
+  </head>
+  <body>
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <a href="index.html">
+                <a href="#home">
                     <img src="https://github.com/Bluezly/iconforgrowstock/blob/main/eec925e4-7dc7-4d71-873e-754f2150cc25.png?raw=true" alt="WebhookLib" class="logo-full">
                     <img src="https://raw.githubusercontent.com/Bluezly/iconforgrowstock/refs/heads/main/eec925e4-7dc7-4d71-873e-754f2150cc25%20(1).png" alt="WebhookLib" class="logo-icon">
                 </a>
             </div>
             <div class="nav-links">
+                <a href="#home" class="nav-link">Home</a>
                 <a href="#features" class="nav-link">Features</a>
-                <a href="docs.html" class="nav-link">Documentation</a>
                 <a href="#examples" class="nav-link">Examples</a>
+                <a href="public/docs/docs.html" class="nav-link">Documentation</a>
+            </div>
+            <div class="nav-actions">
                 <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
                     <svg class="theme-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"/>
                         <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
                     </svg>
                 </button>
-                <button class="github-btn" id="githubBtn" onclick="window.open('https://github.com/USERNAME', '_blank')" aria-label="View on GitHub">
+                <button class="github-btn" onclick="window.open('https://github.com/USERNAME', '_blank')" aria-label="View on GitHub">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                     </svg>
                 </button>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle mobile menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
             </div>
-            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle mobile menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
         </div>
         <!-- Mobile Navigation -->
         <div class="mobile-nav" id="mobileNav">
             <div class="mobile-nav-content">
                 <div class="mobile-nav-links">
+                    <a href="#home" class="mobile-nav-link">Home</a>
                     <a href="#features" class="mobile-nav-link">Features</a>
-                    <a href="docs.html" class="mobile-nav-link">Documentation</a>
                     <a href="#examples" class="mobile-nav-link">Examples</a>
+                    <a href="public/docs/docs.html" class="mobile-nav-link">Documentation</a>
                 </div>
                 <div class="mobile-nav-buttons">
                     <button class="theme-toggle" id="mobileThemeToggle" aria-label="Toggle theme">
@@ -81,64 +93,80 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section id="home" class="hero">
         <div class="hero-container">
             <div class="hero-content">
                 <h1 class="hero-title">
-                    Production-Quality Discord Webhooks
-                    <span class="hero-subtitle">for Roblox Server Environments</span>
+                    <span class="hero-subtitle">WebhookLib</span>
+                    Production-Quality Discord Webhook Library
                 </h1>
                 <p class="hero-description">
-                    WebhookLib provides a complete suite of features for sending Discord webhook messages including rich embeds, player notifications, automatic rate limiting, and robust error handling.
+                    A comprehensive Discord webhook library specifically designed for Roblox Server environments. 
+                    Features automatic rate limiting, player tracking, rich embeds, and robust error handling.
                 </p>
                 <div class="hero-buttons">
-                    <a href="docs.html" class="btn btn-primary">Get Started</a>
-                    <a href="#features" class="btn btn-secondary">Learn More</a>
+                    <a href="public/docs/docs.html" class="btn btn-primary btn-large">
+                        Get Started
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 8px;">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                    <a href="#examples" class="btn btn-secondary btn-large">
+                        View Examples
+                    </a>
                 </div>
             </div>
             <div class="hero-code">
                 <div class="code-block">
                     <div class="code-header">
                         <span class="code-lang">Lua</span>
-                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <button class="copy-btn" onclick="copyCode(this)" aria-label="Copy code to clipboard">Copy</button>
                     </div>
-                    <pre><code>-- Minimal setup
-local WebhookLib = require(game.ReplicatedStorage.WebhookLib)
+                    <pre><code>local WebhookLib = require(game.ReplicatedStorage.WebhookLib)
+
+-- Create a new webhook
 local webhook = WebhookLib.new("YOUR_WEBHOOK_URL")
 
--- Send a message
-webhook:SendMessage("Server started!")
+-- Send a simple message
+webhook:SendMessage("Hello, Discord!")
 
--- Send player join notification
-game.Players.PlayerAdded:Connect(function(player)
-    webhook:SendJoinMessage(player)
-end)</code></pre>
+-- Send a rich embed
+webhook:SendEmbed({
+    title = "Game Event",
+    description = "A player joined the game!",
+    color = 0x00ff00,
+    fields = {
+        {
+            name = "Player",
+            value = "ExamplePlayer",
+            inline = true
+        }
+    }
+})</code></pre>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Features Section -->
-    <section class="features" id="features">
+    <section id="features" class="features">
         <div class="container">
             <h2 class="section-title">Powerful Features</h2>
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="10"/>
-                            <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
-                            <line x1="9" y1="9" x2="9.01" y2="9"/>
-                            <line x1="15" y1="9" x2="15.01" y2="9"/>
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
                         </svg>
                     </div>
                     <h3>Production Ready</h3>
-                    <p>Built for high-traffic Roblox games with robust error handling, automatic retries, and comprehensive logging.</p>
+                    <p>Built for high-traffic games with robust error handling, automatic retries, and comprehensive logging capabilities.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12,6 12,12 16,14"/>
                         </svg>
                     </div>
                     <h3>Rate Limiting</h3>
@@ -147,14 +175,12 @@ end)</code></pre>
                 <div class="feature-card">
                     <div class="feature-icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                            <circle cx="9" cy="7" r="4"/>
-                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
                         </svg>
                     </div>
                     <h3>Player Tracking</h3>
-                    <p>Automatic player join/leave notifications with avatar thumbnails and DataStore-backed join count tracking.</p>
+                    <p>Automatic join/leave notifications with Roblox avatar thumbnails and persistent join count tracking via DataStore.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
@@ -165,82 +191,133 @@ end)</code></pre>
                         </svg>
                     </div>
                     <h3>Rich Embeds</h3>
-                    <p>Send beautiful Discord embeds with automatic sanitization, text truncation, and profanity filtering.</p>
+                    <p>Send beautiful Discord embeds with automatic text sanitization, field validation, and content filtering.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                            <circle cx="12" cy="16" r="1"/>
-                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                         </svg>
                     </div>
                     <h3>Thread Safe</h3>
-                    <p>Non-blocking operations that won't freeze your game with background processing and smart caching.</p>
+                    <p>Non-blocking operations that won't freeze your game, with thread-safe request handling and memory management.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14,2 14,8 20,8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                            <polyline points="10,9 9,9 8,9"/>
                         </svg>
                     </div>
-                    <h3>Easy Setup</h3>
-                    <p>Minimal configuration required with smart defaults. Just provide a webhook URL and you're ready to go.</p>
+                    <h3>Comprehensive Logging</h3>
+                    <p>Debug mode for troubleshooting with detailed request/response logging and performance monitoring.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Quick Examples Section -->
-    <section class="examples" id="examples">
+    <!-- Examples Section -->
+    <section id="examples" class="examples">
         <div class="container">
-            <h2 class="section-title">Quick Examples</h2>
+            <h2 class="section-title">Code Examples</h2>
             <div class="examples-grid">
                 <div class="example-card">
-                    <h3>Basic Usage</h3>
+                    <h3>Basic Setup</h3>
                     <div class="code-block">
                         <div class="code-header">
-                            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                            <span class="code-lang">Lua</span>
+                            <button class="copy-btn" onclick="copyCode(this)" aria-label="Copy code to clipboard">Copy</button>
                         </div>
                         <pre><code>local WebhookLib = require(game.ReplicatedStorage.WebhookLib)
-local webhook = WebhookLib.new("https://discord.com/api/webhooks/...")
 
-webhook:SendMessage("Hello Discord!")</code></pre>
+-- Create webhook with basic configuration
+local webhook = WebhookLib.new("YOUR_WEBHOOK_URL", {
+    username = "My Game Bot",
+    avatar_url = "https://example.com/avatar.png",
+    default_color = 0x0099ff,
+    debug = true
+})
+
+-- Send a test message
+webhook:SendMessage("🎮 Server started successfully!")</code></pre>
                     </div>
                 </div>
-                
-                <div class="example-card">
-                    <h3>Rich Embed</h3>
-                    <div class="code-block">
-                        <div class="code-header">
-                            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-                        </div>
-                        <pre><code>webhook:SendEmbed({
-    title = "Game Statistics",
-    description = "Current server stats",
-    color = 0x0099ff,
-    fields = {
-        {name = "Players", value = "15", inline = true},
-        {name = "Uptime", value = "2 hours", inline = true}
-    }
-})</code></pre>
-                    </div>
-                </div>
-
                 <div class="example-card">
                     <h3>Player Events</h3>
                     <div class="code-block">
                         <div class="code-header">
-                            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                            <span class="code-lang">Lua</span>
+                            <button class="copy-btn" onclick="copyCode(this)" aria-label="Copy code to clipboard">Copy</button>
                         </div>
-                        <pre><code>-- Auto join/leave notifications
+                        <pre><code>-- Automatic player join/leave notifications
 game.Players.PlayerAdded:Connect(function(player)
-    webhook:SendJoinMessage(player)
+    pcall(function()
+        webhook:SendJoinMessage(player)
+    end)
 end)
 
 game.Players.PlayerRemoving:Connect(function(player)
-    webhook:SendLeaveMessage(player)
+    pcall(function()
+        webhook:SendLeaveMessage(player)
+    end)
 end)</code></pre>
+                    </div>
+                </div>
+                <div class="example-card">
+                    <h3>Rich Embeds</h3>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Lua</span>
+                            <button class="copy-btn" onclick="copyCode(this)" aria-label="Copy code to clipboard">Copy</button>
+                        </div>
+                        <pre><code>-- Send a rich embed with game statistics
+webhook:SendEmbed({
+    title = "🏆 Game Statistics",
+    description = "Current server statistics",
+    color = 0x0099ff,
+    fields = {
+        {
+            name = "👥 Players Online",
+            value = tostring(#game.Players:GetPlayers()),
+            inline = true
+        },
+        {
+            name = "⏰ Server Uptime",
+            value = "2 hours 15 minutes",
+            inline = true
+        }
+    },
+    thumbnail = {
+        url = "https://example.com/thumbnail.png"
+    },
+    footer = {
+        text = "Automated Report"
+    },
+    timestamp = os.date("!%Y-%m-%dT%H:%M:%SZ")
+})</code></pre>
+                    </div>
+                </div>
+                <div class="example-card">
+                    <h3>Advanced Configuration</h3>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Lua</span>
+                            <button class="copy-btn" onclick="copyCode(this)" aria-label="Copy code to clipboard">Copy</button>
+                        </div>
+                        <pre><code>-- Production-ready setup with rate limiting
+local webhook = WebhookLib.new("YOUR_WEBHOOK_URL", {
+    username = "🤖 Production Bot",
+    queue_rate_limit = 2, -- 2 requests per second
+    max_retries = 5,
+    retry_backoff_base = 2,
+    filter_profanity = true,
+    cache_ttl_avatar = 600, -- 10 minutes
+    datastore_name = "MyGame_WebhookData",
+    banned_words = {"spam", "advertisement"}
+})</code></pre>
                     </div>
                 </div>
             </div>
@@ -249,37 +326,40 @@ end)</code></pre>
 
     <!-- CTA Section -->
     <section class="cta">
-        <div class="container">
-            <div class="cta-content">
-                <h2>Ready to Get Started?</h2>
-                <p>Check out the comprehensive documentation to learn how to integrate WebhookLib into your Roblox game.</p>
-                <a href="docs.html" class="btn btn-primary btn-large">View Documentation</a>
+        <div class="cta-content">
+            <h2>Ready to Get Started?</h2>
+            <p>Join thousands of developers using WebhookLib to enhance their Roblox games with powerful Discord integration.</p>
+            <div class="hero-buttons">
+                <a href="public/docs/docs.html" class="btn btn-primary btn-large">
+                    Read Documentation
+                </a>
+                <button class="btn btn-secondary btn-large" onclick="window.open('https://github.com/USERNAME', '_blank')">
+                    View on GitHub
+                </button>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <img src="https://raw.githubusercontent.com/Bluezly/iconforgrowstock/refs/heads/main/eec925e4-7dc7-4d71-873e-754f2150cc25%20(1).png" alt="WebhookLib" class="footer-logo-img">
-                    <span>WebhookLib</span>
-                </div>
-                <div class="footer-links">
-                    <a href="docs.html">Documentation</a>
-                    <a href="#features">Features</a>
-                    <a href="#examples">Examples</a>
-                </div>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="https://raw.githubusercontent.com/Bluezly/iconforgrowstock/refs/heads/main/eec925e4-7dc7-4d71-873e-754f2150cc25%20(1).png" alt="WebhookLib" class="footer-logo-img">
+                <span>WebhookLib</span>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 WebhookLib. Production-quality Discord webhook library for Roblox. by 
-                   <a href="https://www.bluezly.exid.me/" target="_blank" rel="noopener noreferrer">bluezly</a>
-                </p>
+            <div class="footer-links">
+                <a href="public/docs/docs.html">Documentation</a>
+                <a href="#examples">Examples</a>
+                <a href="https://github.com/USERNAME" target="_blank">GitHub</a>
+                <a href="#features">Features</a>
             </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 WebhookLib. Built with ❤️ for the Roblox community.</p>
         </div>
     </footer>
 
-    <script src="script.js"></script>
-</body>
+    <!-- Scripts -->
+    <script src="src/script.js"></script>
+  </body>
 </html>
