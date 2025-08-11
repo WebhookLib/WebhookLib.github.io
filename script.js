@@ -1,4 +1,4 @@
-// Enhanced Mobile-Optimized Script for WebhookLib
+// Enhanced Mobile-Optimized Documentation Script
 
 // Utility functions for mobile detection and touch handling
 const MobileUtils = {
@@ -520,55 +520,13 @@ class DocumentationSystem {
 
     async loadDocs() {
         try {
-            // Try to load from docs.json, fallback to sample data
-            let docs;
-            try {
-                const response = await fetch('docs.json');
-                if (!response.ok) throw new Error('Network response was not ok');
-                docs = await response.json();
-            } catch (fetchError) {
-                console.warn('Could not load docs.json, using sample data');
-                docs = this.getSampleDocs();
-            }
-            
-            this.docs = docs;
+            const response = await fetch('docs.json');
+            if (!response.ok) throw new Error('Network response was not ok');
+            this.docs = await response.json();
         } catch (error) {
             console.error('Failed to load documentation:', error);
             throw error;
         }
-    }
-
-    getSampleDocs() {
-        return {
-            sections: [
-                {
-                    id: 'getting-started',
-                    title: 'Getting Started',
-                    content: 'Welcome to WebhookLib documentation. This library provides production-quality Discord webhook functionality for Roblox.',
-                    subsections: [
-                        {
-                            title: 'Installation',
-                            content: 'To install WebhookLib in your Roblox project:\n\n```lua\n-- Method 1: Direct require\nlocal WebhookLib = require(game.ServerScriptService.WebhookLib)\n\n-- Method 2: Using a module ID\nlocal WebhookLib = require(1234567890) -- Replace with actual module ID\n```\n\n**Note:** Make sure HTTP requests are enabled in your game settings.'
-                        },
-                        {
-                            title: 'Quick Start',
-                            content: 'Here is a simple example to get you started:\n\n```lua\nlocal WebhookLib = require(game.ServerScriptService.WebhookLib)\n\n-- Create a new webhook\nlocal webhook = WebhookLib.new("YOUR_WEBHOOK_URL")\n\n-- Send a simple message\nwebhook:Send("Hello, Discord!")\n\n-- Send a rich embed\nwebhook:SendEmbed({\n    title = "Game Event",\n    description = "A player joined the game!",\n    color = 0x00ff00,\n    fields = {\n        {\n            name = "Player",\n            value = "ExamplePlayer",\n            inline = true\n        }\n    }\n})\n```'
-                        }
-                    ]
-                },
-                {
-                    id: 'api',
-                    title: 'API Reference',
-                    content: 'Complete API reference for all WebhookLib functions and methods.',
-                    subsections: [
-                        {
-                            title: 'Webhook Class',
-                            content: 'The main Webhook class provides all functionality for sending Discord webhooks.\n\n## Constructor\n\n```lua\nlocal webhook = WebhookLib.new(url, options)\n```\n\n**Parameters:**\n- `url` (string): The Discord webhook URL\n- `options` (table, optional): Configuration options\n\n**Options:**\n- `username` (string): Override webhook username\n- `avatar_url` (string): Override webhook avatar\n- `rate_limit` (number): Rate limit in seconds (default: 1)'
-                        }
-                    ]
-                }
-            ]
-        };
     }
 
     buildSearchIndex() {
