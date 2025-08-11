@@ -139,6 +139,10 @@ a:hover {
     color: var(--blue-700);
 }
 
+.keyword { color: blue; font-weight: bold; }
+.string { color: brown; }
+.comment { color: green; font-style: italic; }
+
 /* Container */
 .container {
     max-width: 1200px;
