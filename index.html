@@ -1,4 +1,3 @@
-You said:
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -102,7 +101,8 @@ You said:
                     <div class="code-header">
                         <span class="code-lang">Lua</span>
                         <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <pre id="luaCodeBlock"><code>-- Minimal setup
+                    </div>
+                    <pre id="luaCodeBlock"><code>-- Minimal setup
 local WebhookLib = require(game.ReplicatedStorage.WebhookLib)
 local webhook = WebhookLib.new("YOUR_WEBHOOK_URL")
 
@@ -113,12 +113,8 @@ webhook:SendMessage("Server started!")
 game.Players.PlayerAdded:Connect(function(player)
     webhook:SendJoinMessage(player)
 end)</code></pre>
-        </div>
-      </div>
-    </div>
-  </section>
-  </div>
-</div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -283,20 +279,7 @@ end)</code></pre>
             </div>
         </div>
     </footer>
-<script>
-  function isMobile() {
-    return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-  }
 
-  window.addEventListener('DOMContentLoaded', () => {
-    if (isMobile()) {
-      const luaCodeBlock = document.getElementById('luaCodeBlock');
-      if (luaCodeBlock) {
-        luaCodeBlock.style.display = 'none';
-      }
-    }
-  });
-</script>
     <script src="script.js"></script>
 </body>
 </html>
