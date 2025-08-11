@@ -493,8 +493,13 @@ a:hover {
     align-items: center;
     justify-content: space-between;
     padding: var(--spacing-md) var(--spacing-lg);
-    background-color: var(--code-bg-secondary);
-    border-bottom: 1px solid var(--code-border);
+    background-color: var(--code-bg-secondary) !important;
+    border-bottom: 1px solid var(--code-border) !important;
+}
+
+[data-theme="dark"] .code-header {
+    background-color: #334155 !important;
+    border-bottom-color: #475569 !important;
 }
 
 .code-lang {
@@ -535,9 +540,13 @@ a:hover {
     font-family: var(--font-family-mono);
     font-size: 0.875rem;
     line-height: 1.5;
-    background-color: var(--code-bg);
+    background-color: var(--code-bg) !important;
     scrollbar-width: thin;
     scrollbar-color: var(--border-medium) transparent;
+}
+
+[data-theme="dark"] .code-block pre {
+    background-color: #1e293b !important;
 }
 
 .code-block pre::-webkit-scrollbar {
@@ -558,7 +567,7 @@ a:hover {
 }
 
 .code-block code {
-    color: var(--code-text);
+    color: var(--code-text) !important;
     font-family: var(--font-family-mono);
     background: transparent;
     padding: 0;
@@ -568,6 +577,10 @@ a:hover {
     white-space: pre;
     word-wrap: normal;
     overflow-wrap: normal;
+}
+
+[data-theme="dark"] .code-block code {
+    color: #f1f5f9 !important;
 }
 
 /* Syntax highlighting */
