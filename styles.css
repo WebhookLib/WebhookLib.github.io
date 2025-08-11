@@ -1488,47 +1488,30 @@ a:hover {
     }
 }
 
-/* Dark mode specific mobile adjustments */
-@media (max-width: 768px) {
-    [data-theme="dark"] .mobile-nav {
-        background-color: var(--bg-primary);
-        border-bottom-color: var(--border-light);
-    }
+[data-theme="dark"] {
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --bg-tertiary: #334155;
+    --text-primary: #f1f5f9;
+    --text-secondary: #cbd5e1;
+    --text-tertiary: #94a3b8;
+    --border-light: #334155;
+    --border-medium: #475569;
     
-    [data-theme="dark"] .docs-sidebar {
-        background-color: var(--bg-secondary);
-        border-right-color: var(--border-light);
-    }
+    /* Dark mode code block colors - الآن بخلفية داكنة */
+    --code-bg: #1e293b;
+    --code-bg-secondary: #334155;
+    --code-text: #f1f5f9;
+    --code-border: #475569;
     
-    /* Dark mode code blocks remain white for better readability */
-    [data-theme="dark"] .code-block {
-        background-color: var(--code-bg);
-        border-color: var(--code-border);
-    }
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.4);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.4), 0 8px 10px -6px rgb(0 0 0 / 0.4);
     
-    [data-theme="dark"] .code-header {
-        background-color: var(--code-bg-secondary);
-        border-bottom-color: var(--code-border);
-    }
-    
-    [data-theme="dark"] .code-lang {
-        color: var(--code-text);
-    }
-    
-    [data-theme="dark"] .copy-btn {
-        background: var(--code-bg);
-        border-color: var(--code-border);
-        color: var(--code-text);
-    }
-    
-    [data-theme="dark"] .code-block pre {
-        background-color: var(--code-bg);
-    }
-    
-    [data-theme="dark"] .code-block code {
-        color: var(--code-text);
-    }
+    --github-icon-filter: brightness(0) saturate(100%) invert(85%) sepia(8%) saturate(292%) hue-rotate(202deg) brightness(102%) contrast(93%);
 }
+
 
 /* Print styles */
 @media print {
