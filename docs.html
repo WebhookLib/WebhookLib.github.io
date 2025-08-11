@@ -8,19 +8,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-        <link rel="icon" href="https://raw.githubusercontent.com/Bluezly/iconforgrowstock/refs/heads/main/eec925e4-7dc7-4d71-873e-754f2150cc25%20(1).png" type="image/png" />
-      <!-- Open Graph Tags -->
-  <meta property="og:title" content="WebhookLib - Production-Quality Discord Webhook Library for Roblox" />
-  <meta property="og:description" content="WebhookLib provides a complete suite of features for sending Discord webhook messages including rich embeds, player notifications, automatic rate limiting, and robust error handling." />
-  <meta property="og:image" content="https://raw.githubusercontent.com/Bluezly/iconforgrowstock/refs/heads/main/eec925e4-7dc7-4d71-873e-754f2150cc25%20(1).png" />
-  <meta property="og:url" content="https://WebhookLib.github.io" />
-  <meta property="og:type" content="website" />
-
-  <!-- Optional: Twitter card tags -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="WebhookLib - Production-Quality Discord Webhook Library for Roblox" />
-  <meta name="twitter:description" content="WebhookLib provides a complete suite of features for sending Discord webhook messages including rich embeds, player notifications, automatic rate limiting, and robust error handling." />
-  <meta name="twitter:image" content="https://raw.githubusercontent.com/Bluezly/iconforgrowstock/refs/heads/main/eec925e4-7dc7-4d71-873e-754f2150cc25%20(1).png" />
+    <link rel="icon" href="https://raw.githubusercontent.com/Bluezly/iconforgrowstock/refs/heads/main/eec925e4-7dc7-4d71-873e-754f2150cc25%20(1).png" type="image/png" />
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Documentation - WebhookLib" />
+    <meta property="og:description" content="Complete documentation for WebhookLib - Production-Quality Discord Webhook Library for Roblox" />
+    <meta property="og:image" content="https://raw.githubusercontent.com/Bluezly/iconforgrowstock/refs/heads/main/eec925e4-7dc7-4d71-873e-754f2150cc25%20(1).png" />
+    <meta property="og:url" content="https://WebhookLib.github.io/docs" />
+    <meta property="og:type" content="website" />
 </head>
 <body>
     <!-- Navigation -->
@@ -36,30 +31,51 @@
                 <a href="index.html" class="nav-link">Home</a>
                 <a href="#getting-started" class="nav-link">Getting Started</a>
                 <a href="#api" class="nav-link">API Reference</a>
-                <button class="theme-toggle" id="themeToggle">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
                     <svg class="theme-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"/>
                         <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
                     </svg>
                 </button>
+                <button class="github-btn" onclick="window.open('https://github.com/USERNAME', '_blank')" aria-label="View on GitHub">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </button>
             </div>
-            <button class="mobile-menu-toggle" id="mobileMenuToggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
+            <div class="nav-actions">
+                <button class="mobile-sidebar-toggle" id="mobileSidebarToggle" aria-label="Toggle sidebar">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="6" x2="21" y2="6"/>
+                        <line x1="3" y1="12" x2="21" y2="12"/>
+                        <line x1="3" y1="18" x2="21" y2="18"/>
+                    </svg>
+                </button>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle mobile menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
         </div>
         <!-- Mobile Navigation -->
         <div class="mobile-nav" id="mobileNav">
-            <div class="mobile-nav-links">
-                <a href="index.html" class="mobile-nav-link">Home</a>
-                <a href="#getting-started" class="mobile-nav-link">Getting Started</a>
-                <a href="#api" class="mobile-nav-link">API Reference</a>
+            <div class="mobile-nav-content">
+                <div class="mobile-nav-links">
+                    <a href="index.html" class="mobile-nav-link">Home</a>
+                    <a href="#getting-started" class="mobile-nav-link">Getting Started</a>
+                    <a href="#api" class="mobile-nav-link">API Reference</a>
+                </div>
                 <div class="mobile-nav-buttons">
-                    <button class="theme-toggle" id="mobileThemeToggle">
+                    <button class="theme-toggle" id="mobileThemeToggle" aria-label="Toggle theme">
                         <svg class="theme-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="12" cy="12" r="5"/>
                             <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                        </svg>
+                    </button>
+                    <button class="github-btn" onclick="window.open('https://github.com/USERNAME', '_blank')" aria-label="View on GitHub">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                         </svg>
                     </button>
                 </div>
@@ -75,7 +91,33 @@
                     <input type="text" id="searchInput" placeholder="Search documentation..." class="search-input">
                 </div>
                 <nav class="sidebar-nav" id="sidebarNav">
-                    <!-- Navigation will be populated by JavaScript -->
+                    <div class="nav-section">
+                        <div class="nav-section-title">Getting Started</div>
+                        <div class="nav-items">
+                            <div class="nav-item active" data-section="introduction">Introduction</div>
+                            <div class="nav-item" data-section="installation">Installation</div>
+                            <div class="nav-item" data-section="quick-start">Quick Start</div>
+                        </div>
+                    </div>
+                    <div class="nav-section">
+                        <div class="nav-section-title">API Reference</div>
+                        <div class="nav-items">
+                            <div class="nav-item" data-section="webhooklib-new">WebhookLib.new()</div>
+                            <div class="nav-item" data-section="send-message">SendMessage()</div>
+                            <div class="nav-item" data-section="send-embed">SendEmbed()</div>
+                            <div class="nav-item" data-section="send-join-message">SendJoinMessage()</div>
+                            <div class="nav-item" data-section="send-leave-message">SendLeaveMessage()</div>
+                            <div class="nav-item" data-section="configuration">Configuration</div>
+                        </div>
+                    </div>
+                    <div class="nav-section">
+                        <div class="nav-section-title">Examples</div>
+                        <div class="nav-items">
+                            <div class="nav-item" data-section="basic-usage">Basic Usage</div>
+                            <div class="nav-item" data-section="advanced-examples">Advanced Examples</div>
+                            <div class="nav-item" data-section="error-handling">Error Handling</div>
+                        </div>
+                    </div>
                 </nav>
             </div>
         </aside>
@@ -83,7 +125,131 @@
         <!-- Main Content -->
         <main class="docs-main">
             <div class="docs-content" id="docsContent">
-                <!-- Content will be populated by JavaScript -->
+                <section id="introduction" class="doc-section">
+                    <h1>Introduction</h1>
+                    <p>WebhookLib is a production-quality Discord webhook library designed specifically for Roblox server environments. It provides a comprehensive set of features for sending Discord messages with automatic rate limiting, error handling, and rich embed support.</p>
+                    
+                    <h2>Why WebhookLib?</h2>
+                    <p>WebhookLib addresses common challenges when working with Discord webhooks in Roblox:</p>
+                    <ul>
+                        <li><strong>Rate Limiting:</strong> Automatic request throttling to prevent hitting Discord's rate limits</li>
+                        <li><strong>Error Handling:</strong> Robust error handling with automatic retries and fallback mechanisms</li>
+                        <li><strong>Player Tracking:</strong> Built-in player join/leave notifications with avatar thumbnails</li>
+                        <li><strong>Rich Embeds:</strong> Easy-to-use embed builder with automatic text sanitization</li>
+                        <li><strong>Thread Safety:</strong> Non-blocking operations that won't freeze your game</li>
+                    </ul>
+                </section>
+
+                <section id="installation" class="doc-section" style="display: none;">
+                    <h1>Installation</h1>
+                    <p>There are several ways to install WebhookLib in your Roblox game:</p>
+                    
+                    <h2>Method 1: Roblox Model</h2>
+                    <p>Download the WebhookLib model from the Roblox catalog and insert it into your game.</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Steps</span>
+                        </div>
+                        <pre><code>1. Open Roblox Studio
+2. Go to the Toolbox
+3. Search for "WebhookLib"
+4. Insert the model into ReplicatedStorage or ServerStorage</code></pre>
+                    </div>
+
+                    <h2>Method 2: Copy and Paste</h2>
+                    <p>Copy the WebhookLib module script and paste it into your game:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Lua</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        </div>
+                        <pre><code>-- Create a ModuleScript in ReplicatedStorage named "WebhookLib"
+-- Then paste the WebhookLib code inside</code></pre>
+                    </div>
+
+                    <h2>Directory Structure</h2>
+                    <p>Place WebhookLib in one of these locations:</p>
+                    <ul>
+                        <li><code>game.ReplicatedStorage.WebhookLib</code> (Recommended)</li>
+                        <li><code>game.ServerStorage.WebhookLib</code></li>
+                        <li><code>game.ServerScriptService.WebhookLib</code></li>
+                    </ul>
+                </section>
+
+                <section id="quick-start" class="doc-section" style="display: none;">
+                    <h1>Quick Start</h1>
+                    <p>Get up and running with WebhookLib in just a few minutes:</p>
+
+                    <h2>Step 1: Create a Discord Webhook</h2>
+                    <p>First, create a webhook in your Discord server:</p>
+                    <ol>
+                        <li>Right-click on the channel where you want to receive messages</li>
+                        <li>Select "Edit Channel" → "Integrations" → "Webhooks"</li>
+                        <li>Click "Create Webhook"</li>
+                        <li>Copy the webhook URL</li>
+                    </ol>
+
+                    <h2>Step 2: Basic Setup</h2>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Lua</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        </div>
+                        <pre><code>local WebhookLib = require(game.ReplicatedStorage.WebhookLib)
+
+-- Create a new webhook instance
+local webhook = WebhookLib.new("YOUR_WEBHOOK_URL_HERE")
+
+-- Send your first message
+webhook:SendMessage("Hello from Roblox!")</code></pre>
+                    </div>
+
+                    <h2>Step 3: Player Notifications</h2>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Lua</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        </div>
+                        <pre><code>-- Automatic player join notifications
+game.Players.PlayerAdded:Connect(function(player)
+    webhook:SendJoinMessage(player)
+end)
+
+-- Automatic player leave notifications
+game.Players.PlayerRemoving:Connect(function(player)
+    webhook:SendLeaveMessage(player)
+end)</code></pre>
+                    </div>
+
+                    <h2>Step 4: Rich Embeds</h2>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Lua</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        </div>
+                        <pre><code>-- Send a rich embed
+webhook:SendEmbed({
+    title = "Server Statistics",
+    description = "Current server information",
+    color = 0x00ff00,
+    fields = {
+        {
+            name = "Players Online",
+            value = tostring(#game.Players:GetPlayers()),
+            inline = true
+        },
+        {
+            name = "Server Uptime",
+            value = "2 hours 30 minutes",
+            inline = true
+        }
+    },
+    timestamp = os.date("!%Y-%m-%dT%H:%M:%SZ")
+})</code></pre>
+                    </div>
+                </section>
             </div>
         </main>
     </div>
