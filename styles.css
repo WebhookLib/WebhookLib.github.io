@@ -472,15 +472,20 @@ a:hover {
     flex-wrap: wrap;
 }
 
-/* Code Block - Fixed for dark mode */
+/* Code Block - REALLY Fixed for dark mode */
 .code-block {
-    background-color: var(--code-bg);
-    border: 1px solid var(--code-border);
+    background-color: var(--code-bg) !important;
+    border: 1px solid var(--code-border) !important;
     border-radius: 12px;
     overflow: hidden;
     box-shadow: var(--shadow-lg);
     width: 100%;
     margin: var(--spacing-md) 0;
+}
+
+[data-theme="dark"] .code-block {
+    background-color: #1e293b !important;
+    border-color: #475569 !important;
 }
 
 .code-header {
