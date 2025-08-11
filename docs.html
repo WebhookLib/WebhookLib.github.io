@@ -8,19 +8,20 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-        <link rel="icon" href="https://raw.githubusercontent.com/Bluezly/iconforgrowstock/refs/heads/main/eec925e4-7dc7-4d71-873e-754f2150cc25%20(1).png" type="image/png" />
-      <!-- Open Graph Tags -->
-  <meta property="og:title" content="WebhookLib - Production-Quality Discord Webhook Library for Roblox" />
-  <meta property="og:description" content="WebhookLib provides a complete suite of features for sending Discord webhook messages including rich embeds, player notifications, automatic rate limiting, and robust error handling." />
-  <meta property="og:image" content="https://raw.githubusercontent.com/Bluezly/iconforgrowstock/refs/heads/main/eec925e4-7dc7-4d71-873e-754f2150cc25%20(1).png" />
-  <meta property="og:url" content="https://WebhookLib.github.io" />
-  <meta property="og:type" content="website" />
+    <link rel="icon" href="https://raw.githubusercontent.com/Bluezly/iconforgrowstock/refs/heads/main/eec925e4-7dc7-4d71-873e-754f2150cc25%20(1).png" type="image/png" />
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="WebhookLib - Production-Quality Discord Webhook Library for Roblox" />
+    <meta property="og:description" content="WebhookLib provides a complete suite of features for sending Discord webhook messages including rich embeds, player notifications, automatic rate limiting, and robust error handling." />
+    <meta property="og:image" content="https://raw.githubusercontent.com/Bluezly/iconforgrowstock/refs/heads/main/eec925e4-7dc7-4d71-873e-754f2150cc25%20(1).png" />
+    <meta property="og:url" content="https://WebhookLib.github.io" />
+    <meta property="og:type" content="website" />
 
-  <!-- Optional: Twitter card tags -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="WebhookLib - Production-Quality Discord Webhook Library for Roblox" />
-  <meta name="twitter:description" content="WebhookLib provides a complete suite of features for sending Discord webhook messages including rich embeds, player notifications, automatic rate limiting, and robust error handling." />
-  <meta name="twitter:image" content="https://raw.githubusercontent.com/Bluezly/iconforgrowstock/refs/heads/main/eec925e4-7dc7-4d71-873e-754f2150cc25%20(1).png" />
+    <!-- Optional: Twitter card tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="WebhookLib - Production-Quality Discord Webhook Library for Roblox" />
+    <meta name="twitter:description" content="WebhookLib provides a complete suite of features for sending Discord webhook messages including rich embeds, player notifications, automatic rate limiting, and robust error handling." />
+    <meta name="twitter:image" content="https://raw.githubusercontent.com/Bluezly/iconforgrowstock/refs/heads/main/eec925e4-7dc7-4d71-873e-754f2150cc25%20(1).png" />
 </head>
 <body>
     <!-- Navigation -->
@@ -32,34 +33,59 @@
                     <img src="https://raw.githubusercontent.com/Bluezly/iconforgrowstock/refs/heads/main/eec925e4-7dc7-4d71-873e-754f2150cc25%20(1).png" alt="WebhookLib" class="logo-icon">
                 </a>
             </div>
+            
+            <!-- Desktop Navigation Links -->
             <div class="nav-links">
                 <a href="index.html" class="nav-link">Home</a>
                 <a href="#getting-started" class="nav-link">Getting Started</a>
                 <a href="#api" class="nav-link">API Reference</a>
-                <button class="theme-toggle" id="themeToggle">
-                    <svg class="theme-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            </div>
+            
+            <!-- Actions (Theme Toggle + Mobile Menu) -->
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <svg class="theme-icon sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"/>
                         <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
                     </svg>
+                    <svg class="theme-icon moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                </button>
+                
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle mobile menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                
+                <!-- Mobile Sidebar Toggle (for documentation page) -->
+                <button class="mobile-sidebar-toggle" id="mobileSidebarToggle" aria-label="Toggle sidebar" style="display: none;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="6" x2="21" y2="6"/>
+                        <line x1="3" y1="12" x2="21" y2="12"/>
+                        <line x1="3" y1="18" x2="21" y2="18"/>
+                    </svg>
                 </button>
             </div>
-            <button class="mobile-menu-toggle" id="mobileMenuToggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
         </div>
+        
         <!-- Mobile Navigation -->
         <div class="mobile-nav" id="mobileNav">
-            <div class="mobile-nav-links">
-                <a href="index.html" class="mobile-nav-link">Home</a>
-                <a href="#getting-started" class="mobile-nav-link">Getting Started</a>
-                <a href="#api" class="mobile-nav-link">API Reference</a>
+            <div class="mobile-nav-content">
+                <div class="mobile-nav-links">
+                    <a href="index.html" class="mobile-nav-link">Home</a>
+                    <a href="#getting-started" class="mobile-nav-link">Getting Started</a>
+                    <a href="#api" class="mobile-nav-link">API Reference</a>
+                </div>
                 <div class="mobile-nav-buttons">
-                    <button class="theme-toggle" id="mobileThemeToggle">
-                        <svg class="theme-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <button class="theme-toggle" id="mobileThemeToggle" aria-label="Toggle theme">
+                        <svg class="theme-icon sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="12" cy="12" r="5"/>
                             <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                        </svg>
+                        <svg class="theme-icon moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
                         </svg>
                     </button>
                 </div>
@@ -91,6 +117,150 @@
     <!-- Mobile Sidebar Overlay -->
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-    <script src="script.js"></script>
+    <script>
+        // Enhanced JavaScript for better mobile navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const mobileSidebarToggle = document.getElementById('mobileSidebarToggle');
+            const mobileNav = document.getElementById('mobileNav');
+            const sidebar = document.getElementById('sidebar');
+            const sidebarOverlay = document.getElementById('sidebarOverlay');
+            const themeToggle = document.getElementById('themeToggle');
+            const mobileThemeToggle = document.getElementById('mobileThemeToggle');
+
+            // Check if we're on docs page
+            const isDocsPage = document.querySelector('.docs-container') !== null;
+            
+            if (isDocsPage && mobileSidebarToggle) {
+                mobileSidebarToggle.style.display = 'flex';
+                mobileMenuToggle.style.display = 'none';
+            }
+
+            // Mobile menu toggle
+            if (mobileMenuToggle && mobileNav) {
+                mobileMenuToggle.addEventListener('click', function() {
+                    const isOpen = mobileNav.classList.contains('open');
+                    
+                    if (isOpen) {
+                        mobileNav.classList.remove('open');
+                        mobileMenuToggle.classList.remove('active');
+                        document.body.style.overflow = '';
+                    } else {
+                        mobileNav.classList.add('open');
+                        mobileMenuToggle.classList.add('active');
+                        document.body.style.overflow = 'hidden';
+                    }
+                });
+            }
+
+            // Mobile sidebar toggle
+            if (mobileSidebarToggle && sidebar) {
+                mobileSidebarToggle.addEventListener('click', function() {
+                    const isOpen = sidebar.classList.contains('open');
+                    
+                    if (isOpen) {
+                        sidebar.classList.remove('open');
+                        sidebarOverlay.classList.remove('show');
+                        document.body.style.overflow = '';
+                    } else {
+                        sidebar.classList.add('open');
+                        sidebarOverlay.classList.add('show');
+                        document.body.style.overflow = 'hidden';
+                    }
+                });
+            }
+
+            // Sidebar overlay click
+            if (sidebarOverlay) {
+                sidebarOverlay.addEventListener('click', function() {
+                    sidebar.classList.remove('open');
+                    sidebarOverlay.classList.remove('show');
+                    document.body.style.overflow = '';
+                });
+            }
+
+            // Theme toggle functionality
+            function toggleTheme() {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                
+                document.documentElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                
+                // Update icons
+                updateThemeIcons(newTheme);
+            }
+
+            function updateThemeIcons(theme) {
+                const sunIcons = document.querySelectorAll('.sun-icon');
+                const moonIcons = document.querySelectorAll('.moon-icon');
+                
+                if (theme === 'dark') {
+                    sunIcons.forEach(icon => icon.style.display = 'none');
+                    moonIcons.forEach(icon => icon.style.display = 'block');
+                } else {
+                    sunIcons.forEach(icon => icon.style.display = 'block');
+                    moonIcons.forEach(icon => icon.style.display = 'none');
+                }
+            }
+
+            // Initialize theme
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcons(savedTheme);
+
+            // Theme toggle events
+            if (themeToggle) {
+                themeToggle.addEventListener('click', toggleTheme);
+            }
+            
+            if (mobileThemeToggle) {
+                mobileThemeToggle.addEventListener('click', toggleTheme);
+            }
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (mobileNav && mobileNav.classList.contains('open')) {
+                    if (!mobileNav.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+                        mobileNav.classList.remove('open');
+                        mobileMenuToggle.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
+                }
+            });
+
+            // Close mobile menu when clicking on a link
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    if (mobileNav) {
+                        mobileNav.classList.remove('open');
+                        mobileMenuToggle.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
+                });
+            });
+
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    // Close mobile menu on larger screens
+                    if (mobileNav) {
+                        mobileNav.classList.remove('open');
+                    }
+                    if (mobileMenuToggle) {
+                        mobileMenuToggle.classList.remove('active');
+                    }
+                    if (sidebar) {
+                        sidebar.classList.remove('open');
+                    }
+                    if (sidebarOverlay) {
+                        sidebarOverlay.classList.remove('show');
+                    }
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
