@@ -844,28 +844,20 @@ highlightCode(code, language) {
         return div.innerHTML;
     };
 
-    const escaped = escapeHtml(code);
+    let escaped = escapeHtml(code);
 
     if (language === 'lua') {
-        return escaped
-            // Keywords
-            .replace(/\b(local|function|end|if|then|else|elseif|while|for|do|repeat|until|break|return|and|or|not|true|false|nil)\b/g, '<span class="keyword">$1</span>')
-            // Strings
-            .replace(/(["'])((?:\\.|(?!\1)[^\\])*?)\1/g, '<span class="string">$1$2$1</span>')
-            // Comments
-            .replace(/(--.*$)/gm, '<span class="comment">$1</span>')
-            // Numbers
-            .replace(/\b\d+\.?\d*\b/g, '<span class="number">$&</span>');
+        escaped = escaped.replace(/\b(local|function|end|if|then|else|elseif|while|for|do|repeat|until|break|return|and|or|not|true|false|nil)\b/g, '<span class="keyword">$1</span>');
+        escaped = escaped.replace(/(["'])(?:\\.|(?!\1)[^\\])*?\1/g, match => `<span class="string">${match}</span>`);
+        escaped = escaped.replace(/(--.*$)/gm, '<span class="comment">$1</span>');
+        escaped = escaped.replace(/\b\d+\.?\d*\b/g, '<span class="number">$&</span>');
+        return escaped;
     } else if (language === 'javascript' || language === 'js') {
-        return escaped
-            // Keywords
-            .replace(/\b(function|const|let|var|if|else|for|while|do|switch|case|break|continue|return|try|catch|finally|class|extends|import|export|default|async|await|true|false|null|undefined)\b/g, '<span class="keyword">$1</span>')
-            // Strings
-            .replace(/(["'`])((?:\\.|(?!\1)[^\\])*?)\1/g, '<span class="string">$1$2$1</span>')
-            // Comments
-            .replace(/(\/\/.*$|\/\*[\s\S]*?\*\/)/gm, '<span class="comment">$1</span>')
-            // Numbers
-            .replace(/\b\d+\.?\d*\b/g, '<span class="number">$&</span>');
+        escaped = escaped.replace(/\b(function|const|let|var|if|else|for|while|do|switch|case|break|continue|return|try|catch|finally|class|extends|import|export|default|async|await|true|false|null|undefined)\b/g, '<span class="keyword">$1</span>');
+        escaped = escaped.replace(/(["'`])(?:\\.|(?!\1)[^\\])*?\1/g, match => `<span class="string">${match}</span>`);
+        escaped = escaped.replace(/(\/\/.*$|\/\*[\s\S]*?\*\/)/gm, '<span class="comment">$1</span>');
+        escaped = escaped.replace(/\b\d+\.?\d*\b/g, '<span class="number">$&</span>');
+        return escaped;
     }
 
     return escaped;
@@ -876,7 +868,6 @@ escapeHTML(text) {
     div.textContent = text;
     return div.innerHTML;
 }
-
 
     updateActiveNavItem(sectionId, subsectionId = null) {
         // Remove all active classes
