@@ -930,6 +930,7 @@ escapeHTML(text) {
     div.textContent = text;
     return div.innerHTML;
 }
+    
     updateActiveNavItem(sectionId, subsectionId = null) {
         // Remove all active classes
         document.querySelectorAll('.nav-item').forEach(item => {
