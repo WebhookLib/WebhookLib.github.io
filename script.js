@@ -839,28 +839,37 @@ renderMarkdown(content) {
 
 highlightCode(code, language) {
     const escapeHtml = (text) => {
-        const div = document.createElement('div');
-        div.textContent = text;
-        return div.innerHTML;
+        return text
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
     };
 
-    let escaped = escapeHtml(code);
+    let highlighted = escapeHtml(code);
 
     if (language === 'lua') {
-        escaped = escaped.replace(/\b(local|function|end|if|then|else|elseif|while|for|do|repeat|until|break|return|and|or|not|true|false|nil)\b/g, '<span class="keyword">$1</span>');
-        escaped = escaped.replace(/(["'])(?:\\.|(?!\1)[^\\])*?\1/g, match => `<span class="string">${match}</span>`);
-        escaped = escaped.replace(/(--.*$)/gm, '<span class="comment">$1</span>');
-        escaped = escaped.replace(/\b\d+\.?\d*\b/g, '<span class="number">$&</span>');
-        return escaped;
+        highlighted = highlighted
+            .replace(/\b(local|function|end|if|then|else|elseif|while|for|do|repeat|until|break|return|and|or|not|true|false|nil)\b/g, '<span class="keyword">$1</span>')
+            .replace(/(&#39;)([^&#39;\\]|\\.)*?(&#39;)/g, '<span class="string">$1$2$3</span>')
+            .replace(/(&quot;)([^&quot;\\]|\\.)*?(&quot;)/g, '<span class="string">$1$2$3</span>')
+            .replace(/(--.*$)/gm, '<span class="comment">$1</span>')
+            .replace(/\b\d+\.?\d*\b/g, '<span class="number">$&</span>');
+        return highlighted;
     } else if (language === 'javascript' || language === 'js') {
-        escaped = escaped.replace(/\b(function|const|let|var|if|else|for|while|do|switch|case|break|continue|return|try|catch|finally|class|extends|import|export|default|async|await|true|false|null|undefined)\b/g, '<span class="keyword">$1</span>');
-        escaped = escaped.replace(/(["'`])(?:\\.|(?!\1)[^\\])*?\1/g, match => `<span class="string">${match}</span>`);
-        escaped = escaped.replace(/(\/\/.*$|\/\*[\s\S]*?\*\/)/gm, '<span class="comment">$1</span>');
-        escaped = escaped.replace(/\b\d+\.?\d*\b/g, '<span class="number">$&</span>');
-        return escaped;
+        highlighted = highlighted
+            .replace(/\b(function|const|let|var|if|else|for|while|do|switch|case|break|continue|return|try|catch|finally|class|extends|import|export|default|async|await|true|false|null|undefined)\b/g, '<span class="keyword">$1</span>')
+            .replace(/(&#39;)([^&#39;\\]|\\.)*?(&#39;)/g, '<span class="string">$1$2$3</span>')
+            .replace(/(&quot;)([^&quot;\\]|\\.)*?(&quot;)/g, '<span class="string">$1$2$3</span>')
+            .replace(/(`([^`\\]|\\.)*`)/g, '<span class="string">$1</span>')
+            .replace(/(\/\/.*$)/gm, '<span class="comment">$1</span>')
+            .replace(/(\/\*[\s\S]*?\*\/)/g, '<span class="comment">$1</span>')
+            .replace(/\b\d+\.?\d*\b/g, '<span class="number">$&</span>');
+        return highlighted;
     }
 
-    return escaped;
+    return highlighted;
 }
 
 escapeHTML(text) {
