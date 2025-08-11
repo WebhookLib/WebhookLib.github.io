@@ -101,7 +101,8 @@
                     <div class="code-header">
                         <span class="code-lang">Lua</span>
                         <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <pre id="luaCodeBlock"><code>-- Minimal setup
+                    </div>
+                    <pre id="luaCodeBlock"><code>-- Minimal setup
 local WebhookLib = require(game.ReplicatedStorage.WebhookLib)
 local webhook = WebhookLib.new("YOUR_WEBHOOK_URL")
 
@@ -112,12 +113,8 @@ webhook:SendMessage("Server started!")
 game.Players.PlayerAdded:Connect(function(player)
     webhook:SendJoinMessage(player)
 end)</code></pre>
-        </div>
-      </div>
-    </div>
-  </section>
-  </div>
-</div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -282,20 +279,119 @@ end)</code></pre>
             </div>
         </div>
     </footer>
-<script>
-  function isMobile() {
-    return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-  }
 
-  window.addEventListener('DOMContentLoaded', () => {
-    if (isMobile()) {
-      const luaCodeBlock = document.getElementById('luaCodeBlock');
-      if (luaCodeBlock) {
-        luaCodeBlock.style.display = 'none';
-      }
-    }
-  });
-</script>
-    <script src="script.js"></script>
+    <script>
+        // Mobile detection function
+        function isMobile() {
+            return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
+
+        // Theme toggle functionality
+        function initTheme() {
+            const themeToggle = document.getElementById('themeToggle');
+            const mobileThemeToggle = document.getElementById('mobileThemeToggle');
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            
+            document.documentElement.setAttribute('data-theme', currentTheme);
+
+            function toggleTheme() {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                
+                document.documentElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+            }
+
+            themeToggle?.addEventListener('click', toggleTheme);
+            mobileThemeToggle?.addEventListener('click', toggleTheme);
+        }
+
+        // Mobile navigation functionality
+        function initMobileNav() {
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const mobileNav = document.getElementById('mobileNav');
+
+            mobileMenuToggle?.addEventListener('click', () => {
+                mobileNav.classList.toggle('active');
+                mobileMenuToggle.classList.toggle('active');
+            });
+
+            // Close mobile nav when clicking on links
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileNav.classList.remove('active');
+                    mobileMenuToggle.classList.remove('active');
+                });
+            });
+        }
+
+        // Copy code functionality
+        function copyCode(button) {
+            const codeBlock = button.closest('.code-block').querySelector('code');
+            const text = codeBlock.textContent;
+
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.style.background = '#10b981';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '';
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+            });
+        }
+
+        // Smooth scrolling for anchor links
+        function initSmoothScrolling() {
+            const links = document.querySelectorAll('a[href^="#"]');
+            
+            links.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+
+        // Initialize everything when DOM is loaded
+        window.addEventListener('DOMContentLoaded', () => {
+            initTheme();
+            initMobileNav();
+            initSmoothScrolling();
+
+            // Hide code block on mobile if needed
+            if (isMobile()) {
+                const luaCodeBlock = document.getElementById('luaCodeBlock');
+                if (luaCodeBlock) {
+                    luaCodeBlock.style.display = 'none';
+                }
+            }
+
+            // Make copyCode function globally available
+            window.copyCode = copyCode;
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
 </body>
 </html>
