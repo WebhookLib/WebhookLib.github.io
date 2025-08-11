@@ -780,81 +780,69 @@ renderMobileNavigation() {
 renderMarkdown(content) {
     if (!content) return '';
 
-const escapeHTML = (text) => {
+escapeHTML(text) {
     const div = document.createElement('div');
     div.textContent = text;
     return div.innerHTML;
-};
-
-function parseContent(content) {
-    let html = content
-        .replace(/```(\w+)?\n([\s\S]*?)```/g, (match, lang, code) => {
-            const language = lang || 'text';
-            const highlightedCode = highlightCode(code.trim(), language);
-            return `<div class="code-block" data-language="${language}">
-                        <div class="code-header"><span class="code-lang">${escapeHTML(language)}</span></div>
-                        <pre><code class="language-${escapeHTML(language)}">${highlightedCode}</code></pre>
-                    </div>`;
-        })
-        // Inline code
-        .replace(/`([^`]+)`/g, (m, p1) => `<code class="inline-code">${escapeHTML(p1)}</code>`)
-        // Bold text
-        .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-        // Italic text
-        .replace(/\*([^*]+)\*/g, '<em>$1</em>')
-        // Headers
-        .replace(/^### (.+)$/gm, '<h4>$1</h4>')
-        .replace(/^## (.+)$/gm, '<h3>$1</h3>')
-        .replace(/^# (.+)$/gm, '<h2>$1</h2>')
-        // Links
-        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
-        // Lists (unordered)
-        .replace(/^- (.+)$/gm, '<li>$1</li>')
-        .replace(/(<li>.*<\/li>\s*)+/gs, '<ul>$&</ul>')
-        // Lists (ordered)
-        .replace(/^\d+\. (.+)$/gm, '<li>$1</li>')
-        .replace(/(<li>.*<\/li>\s*)+/gs, (match) => {
-            if (match.includes('<ul>')) return match;
-            return `<ol>${match}</ol>`;
-        })
-        // Blockquotes
-        .replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>')
-        // Horizontal rules
-        .replace(/^---$/gm, '<hr>')
-        // Paragraphs and line breaks
-        .replace(/\n\n/g, '</p><p>')
-        .replace(/\n/g, '<br>');
-
-    // Wrap in paragraph tags if not already wrapped
-    if (!html.startsWith('<')) {
-        html = `<p>${html}</p>`;
-    }
-
-    return html;
 }
 
-function highlightCode(code, language) {
-    const escaped = escapeHTML(code);
-
-    let highlighted = escaped;
+highlightCode(code, language) {
+    const escaped = this.escapeHTML(code);
 
     if (language === 'lua') {
-        highlighted = highlighted
+        return escaped
             .replace(/\b(local|function|end|if|then|else|elseif|while|for|do|repeat|until|break|return|and|or|not|true|false|nil)\b/g, '<span class="keyword">$1</span>')
             .replace(/(["'])(?:\\.|(?!\1)[^\\])*?\1/g, '<span class="string">$&</span>')
             .replace(/(--.*$)/gm, '<span class="comment">$1</span>')
             .replace(/\b\d+\.?\d*\b/g, '<span class="number">$&</span>');
     } else if (language === 'javascript' || language === 'js') {
-        highlighted = highlighted
+        return escaped
             .replace(/\b(function|const|let|var|if|else|for|while|do|switch|case|break|continue|return|try|catch|finally|class|extends|import|export|default|async|await|true|false|null|undefined)\b/g, '<span class="keyword">$1</span>')
             .replace(/(["'`])(?:\\.|(?!\1)[^\\])*?\1/g, '<span class="string">$&</span>')
             .replace(/(\/\/.*$|\/\*[\s\S]*?\*\/)/gm, '<span class="comment">$1</span>')
             .replace(/\b\d+\.?\d*\b/g, '<span class="number">$&</span>');
     }
 
-    return highlighted;
+    return escaped;
 }
 
+renderMarkdown(content) {
+    if (!content) return '';
+
+    let html = content
+        .replace(/```(\w+)?\n([\s\S]*?)```/g, (match, lang, code) => {
+            const language = lang || 'text';
+            const highlightedCode = this.highlightCode(code.trim(), language);
+            return `<div class="code-block" data-language="${language}">
+                        <div class="code-header"><span class="code-lang">${this.escapeHTML(language)}</span></div>
+                        <pre><code class="language-${this.escapeHTML(language)}">${highlightedCode}</code></pre>
+                    </div>`;
+        })
+        .replace(/`([^`]+)`/g, (m, p1) => `<code class="inline-code">${this.escapeHTML(p1)}</code>`)
+        .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*([^*]+)\*/g, '<em>$1</em>')
+        .replace(/^### (.+)$/gm, '<h4>$1</h4>')
+        .replace(/^## (.+)$/gm, '<h3>$1</h3>')
+        .replace(/^# (.+)$/gm, '<h2>$1</h2>')
+        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
+        .replace(/^- (.+)$/gm, '<li>$1</li>')
+        .replace(/(<li>.*<\/li>\s*)+/gs, '<ul>$&</ul>')
+        .replace(/^\d+\. (.+)$/gm, '<li>$1</li>')
+        .replace(/(<li>.*<\/li>\s*)+/gs, (match) => {
+            if (match.includes('<ul>')) return match;
+            return `<ol>${match}</ol>`;
+        })
+        .replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>')
+        .replace(/^---$/gm, '<hr>')
+        .replace(/\n\n/g, '</p><p>')
+        .replace(/\n/g, '<br>');
+
+    if (!html.startsWith('<')) {
+        html = `<p>${html}</p>`;
+    }
+
+    return html;
+}
     
     updateActiveNavItem(sectionId, subsectionId = null) {
         // Remove all active classes
