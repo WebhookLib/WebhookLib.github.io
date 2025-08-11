@@ -206,6 +206,7 @@ end)</code></pre>
                     <h3>Basic Usage</h3>
                     <div class="code-block">
                         <div class="code-header">
+                            <span class="code-lang">Lua</span>
                             <button class="copy-btn" onclick="copyCode(this)">Copy</button>
                         </div>
                         <pre><code>local WebhookLib = require(game.ReplicatedStorage.WebhookLib)
@@ -219,6 +220,7 @@ webhook:SendMessage("Hello Discord!")</code></pre>
                     <h3>Rich Embed</h3>
                     <div class="code-block">
                         <div class="code-header">
+                            <span class="code-lang">Lua</span>
                             <button class="copy-btn" onclick="copyCode(this)">Copy</button>
                         </div>
                         <pre><code>webhook:SendEmbed({
@@ -237,6 +239,7 @@ webhook:SendMessage("Hello Discord!")</code></pre>
                     <h3>Player Events</h3>
                     <div class="code-block">
                         <div class="code-header">
+                            <span class="code-lang">Lua</span>
                             <button class="copy-btn" onclick="copyCode(this)">Copy</button>
                         </div>
                         <pre><code>-- Auto join/leave notifications
@@ -299,13 +302,49 @@ end)</code></pre>
             const currentTheme = localStorage.getItem('theme') || 'light';
             
             document.documentElement.setAttribute('data-theme', currentTheme);
+            updateThemeIcons(currentTheme);
+
+            function updateThemeIcons(theme) {
+                const sunIcons = document.querySelectorAll('.sun-icon');
+                const moonIcons = document.querySelectorAll('.moon-icon');
+                
+                if (theme === 'dark') {
+                    sunIcons.forEach(icon => icon.style.display = 'none');
+                    moonIcons.forEach(icon => icon.style.display = 'block');
+                } else {
+                    sunIcons.forEach(icon => icon.style.display = 'block');
+                    moonIcons.forEach(icon => icon.style.display = 'none');
+                }
+            }
 
             function toggleTheme() {
                 const currentTheme = document.documentElement.getAttribute('data-theme');
                 const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
                 
+                // Add smooth transition effect
+                document.body.style.transition = 'background-color 0.5s ease, color 0.5s ease';
+                document.documentElement.style.transition = 'background-color 0.5s ease';
+                
                 document.documentElement.setAttribute('data-theme', newTheme);
                 localStorage.setItem('theme', newTheme);
+                updateThemeIcons(newTheme);
+                
+                // Add rotation animation to theme toggle button
+                const buttons = [themeToggle, mobileThemeToggle].filter(Boolean);
+                buttons.forEach(button => {
+                    button.style.transform = 'rotate(360deg)';
+                    button.style.transition = 'transform 0.5s ease';
+                    
+                    setTimeout(() => {
+                        button.style.transform = 'rotate(0deg)';
+                    }, 500);
+                });
+
+                // Remove transition after animation
+                setTimeout(() => {
+                    document.body.style.transition = '';
+                    document.documentElement.style.transition = '';
+                }, 500);
             }
 
             themeToggle?.addEventListener('click', toggleTheme);
@@ -377,7 +416,8 @@ end)</code></pre>
             initMobileNav();
             initSmoothScrolling();
 
-            // Hide code block on mobile if needed
+            // Initialize everything when DOM is loaded
+            // Hide only the first code block on mobile if needed
             if (isMobile()) {
                 const luaCodeBlock = document.getElementById('luaCodeBlock');
                 if (luaCodeBlock) {
