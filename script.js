@@ -808,7 +808,7 @@ highlightCode(code, language) {
 
     if (language === 'lua') {
         escaped = escaped
-            .replace(/\b(local|function|end|if|then|else|elseif|while|for|do|repeat|until|break|return|and|or|not|true|false|nil)\b/g)
+            // .replace(/\b(local|function|end|if|then|else|elseif|while|for|do|repeat|until|break|return|and|or|not|true|false|nil)\b/g, '<span class="keyword">$1</span>')
             .replace(/(["'])(?:\\.|(?!\1)[^\\])*?\1/g, '<span class="string">$&</span>')
             .replace(/(--.*$)/gm, '<span class="comment">$1</span>')
             .replace(/\b\d+\.?\d*\b/g, '<span class="number">$&</span>');
