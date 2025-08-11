@@ -1,4 +1,4 @@
-// Enhanced Mobile-Optimized Documentation Script
+// Enhanced Mobile-Optimized Script for WebhookLib
 
 // Utility functions for mobile detection and touch handling
 const MobileUtils = {
@@ -850,8 +850,7 @@ class DocumentationSystem {
             .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
             // Lists
             .replace(/^- (.+)$/gm, '<li>$1</li>')
-            .replace(/(<li>.*<\/li>\s*)+/gs, '<ul>            // Links
-            .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')</ul>')
+            .replace(/(<li>.*<\/li>\s*)+/gs, '<ul>$&</ul>')
             .replace(/^\d+\. (.+)$/gm, '<li>$1</li>')
             .replace(/(<li>.*<\/li>\s*)+/gs, (match) => {
                 if (match.includes('<ul>')) return match;
@@ -892,8 +891,7 @@ class DocumentationSystem {
                 // Comments
                 .replace(/(--.*$)/gm, '<span class="comment">$1</span>')
                 // Numbers
-                .replace(/\b\d+\.?\d*\b/g, '<span class="number">            // Links
-            .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')</span>');
+                .replace(/\b\d+\.?\d*\b/g, '<span class="number">$&</span>');
         } else if (language === 'javascript' || language === 'js') {
             return escaped
                 // Keywords
@@ -903,8 +901,7 @@ class DocumentationSystem {
                 // Comments
                 .replace(/(\/\/.*$|\/\*[\s\S]*?\*\/)/gm, '<span class="comment">$1</span>')
                 // Numbers
-                .replace(/\b\d+\.?\d*\b/g, '<span class="number">            // Links
-            .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')</span>');
+                .replace(/\b\d+\.?\d*\b/g, '<span class="number">$&</span>');
         }
 
         return escaped;
