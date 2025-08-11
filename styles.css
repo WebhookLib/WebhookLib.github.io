@@ -1169,6 +1169,13 @@ a:hover {
     align-items: flex-end;
 }
 
+@media (max-width: 768px) {
+  .hero-code {
+    display: none;
+  }
+}
+
+
 /* Responsive Design - Tablet */
 @media (max-width: 1024px) {
     .features-grid {
