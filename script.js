@@ -678,35 +678,28 @@ renderSection(section, targetSubsectionId = null) {
     const content = document.getElementById('docsContent');
     if (!content) return;
 
-    let html = `<div class="section-header">
-                    <h1>${this.escapeHTML(section.title)}</h1>
-                    <p class="section-description">${this.escapeHTML(section.content)}</p>
-                </div>`;
+    let html = `<div class="section-header"><h1>${this.escapeHTML(section.title)}</h1><p class="section-description">${this.escapeHTML(section.content)}</p></div>`;
 
     if (section.subsections) {
         section.subsections.forEach((subsection, index) => {
             const subsectionId = this.createSubsectionId(subsection.title);
-            html += `<section id="${subsectionId}" class="subsection">
-                        <h2>${this.escapeHTML(subsection.title)}</h2>
-                        <div class="subsection-content">${this.renderMarkdown(subsection.content)}</div>
-                    </section>`;
+            html += `<section id="${subsectionId}" class="subsection">`;
+            html += `<h2>${this.escapeHTML(subsection.title)}</h2>`;
+            html += `<div class="subsection-content">${this.renderMarkdown(subsection.content)}</div>`;
             if (index < section.subsections.length - 1) {
                 html += '<hr class="subsection-divider">';
             }
+            html += '</section>';
         });
     }
 
-    // Add navigation buttons for mobile
     if (MobileUtils.isMobile()) {
         html += this.renderMobileNavigation();
     }
 
     content.innerHTML = html;
-
-    // Initialize code copy buttons
     this.initCodeCopyButtons();
 
-    // Enhanced smooth scrolling with mobile considerations
     if (targetSubsectionId) {
         requestAnimationFrame(() => {
             const element = document.getElementById(targetSubsectionId);
@@ -714,11 +707,7 @@ renderSection(section, targetSubsectionId = null) {
                 const offset = MobileUtils.isMobile() ? 80 : 60;
                 const elementPosition = element.getBoundingClientRect().top;
                 const offsetPosition = elementPosition + window.pageYOffset - offset;
-
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
+                window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
             }
         });
     } else {
@@ -741,7 +730,6 @@ initCodeCopyButtons() {
             if (header) {
                 header.appendChild(button);
             } else {
-                // Create header if it doesn't exist
                 const newHeader = document.createElement('div');
                 newHeader.className = 'code-header';
                 newHeader.innerHTML = '<span class="code-lang">Code</span>';
@@ -780,40 +768,11 @@ renderMobileNavigation() {
 renderMarkdown(content) {
     if (!content) return '';
 
-escapeHTML(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
-}
-
-highlightCode(code, language) {
-    const escaped = this.escapeHTML(code);
-
-    if (language === 'lua') {
-        return escaped
-            .replace(/\b(local|function|end|if|then|else|elseif|while|for|do|repeat|until|break|return|and|or|not|true|false|nil)\b/g, '<span class="keyword">$1</span>')
-            .replace(/(["'])(?:\\.|(?!\1)[^\\])*?\1/g, '<span class="string">$&</span>')
-            .replace(/(--.*$)/gm, '<span class="comment">$1</span>')
-            .replace(/\b\d+\.?\d*\b/g, '<span class="number">$&</span>');
-    } else if (language === 'javascript' || language === 'js') {
-        return escaped
-            .replace(/\b(function|const|let|var|if|else|for|while|do|switch|case|break|continue|return|try|catch|finally|class|extends|import|export|default|async|await|true|false|null|undefined)\b/g, '<span class="keyword">$1</span>')
-            .replace(/(["'`])(?:\\.|(?!\1)[^\\])*?\1/g, '<span class="string">$&</span>')
-            .replace(/(\/\/.*$|\/\*[\s\S]*?\*\/)/gm, '<span class="comment">$1</span>')
-            .replace(/\b\d+\.?\d*\b/g, '<span class="number">$&</span>');
-    }
-
-    return escaped;
-}
-
-renderMarkdown(content) {
-    if (!content) return '';
-
     let html = content
         .replace(/```(\w+)?\n([\s\S]*?)```/g, (match, lang, code) => {
             const language = lang || 'text';
             const highlightedCode = this.highlightCode(code.trim(), language);
-            return `<div class="code-block" data-language="${language}">
+            return `<div class="code-block" data-language="${this.escapeHTML(language)}">
                         <div class="code-header"><span class="code-lang">${this.escapeHTML(language)}</span></div>
                         <pre><code class="language-${this.escapeHTML(language)}">${highlightedCode}</code></pre>
                     </div>`;
@@ -843,38 +802,52 @@ renderMarkdown(content) {
 
     return html;
 }
-    
-    updateActiveNavItem(sectionId, subsectionId = null) {
-        // Remove all active classes
-        document.querySelectorAll('.nav-item').forEach(item => {
-            item.classList.remove('active');
-        });
 
-        // Add active class to current item
-        const selector = subsectionId 
-            ? '[data-section="' + sectionId + '"][data-subsection="' + subsectionId + '"]'
-            : '[data-section="' + sectionId + '"]:not([data-subsection])';
-        
-        const activeItem = document.querySelector(selector);
-        if (activeItem) {
-            activeItem.classList.add('active');
-            
-            // Ensure parent section is expanded
-            const parentSection = activeItem.closest('.nav-section');
-            if (parentSection) {
-                parentSection.classList.add('expanded');
-            }
-            
-            // Scroll into view on mobile if needed
-            if (MobileUtils.isMobile() && activeItem) {
-                activeItem.scrollIntoView({ 
-                    behavior: 'smooth', 
-                    block: 'nearest',
-                    inline: 'nearest'
-                });
-            }
-        }
+highlightCode(code, language) {
+    let escaped = this.escapeHTML(code);
+
+    if (language === 'lua') {
+        escaped = escaped
+            .replace(/\b(local|function|end|if|then|else|elseif|while|for|do|repeat|until|break|return|and|or|not|true|false|nil)\b/g, '<span class="keyword">$1</span>')
+            .replace(/(["'])(?:\\.|(?!\1)[^\\])*?\1/g, '<span class="string">$&</span>')
+            .replace(/(--.*$)/gm, '<span class="comment">$1</span>')
+            .replace(/\b\d+\.?\d*\b/g, '<span class="number">$&</span>');
+    } else if (language === 'javascript' || language === 'js') {
+        escaped = escaped
+            .replace(/\b(function|const|let|var|if|else|for|while|do|switch|case|break|continue|return|try|catch|finally|class|extends|import|export|default|async|await|true|false|null|undefined)\b/g, '<span class="keyword">$1</span>')
+            .replace(/(["'`])(?:\\.|(?!\1)[^\\])*?\1/g, '<span class="string">$&</span>')
+            .replace(/(\/\/.*$|\/\*[\s\S]*?\*\/)/gm, '<span class="comment">$1</span>')
+            .replace(/\b\d+\.?\d*\b/g, '<span class="number">$&</span>');
     }
+
+    return escaped;
+}
+
+escapeHTML(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+updateActiveNavItem(sectionId, subsectionId = null) {
+    document.querySelectorAll('.nav-item').forEach(item => {
+        item.classList.remove('active');
+    });
+
+    const selector = subsectionId
+        ? '[data-section="' + sectionId + '"][data-subsection="' + subsectionId + '"]'
+        : '[data-section="' + sectionId + '"]:not([data-subsection])';
+
+    const activeItem = document.querySelector(selector);
+    if (activeItem) {
+        activeItem.classList.add('active');
+        const parentSection = activeItem.closest('.nav-section');
+        if (parentSection) parentSection.classList.add('expanded');
+        if (MobileUtils.isMobile()) activeItem.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+    }
+}
+
+
 
     searchDocumentation(query) {
         const navSections = document.querySelectorAll('.nav-section');
