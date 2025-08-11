@@ -780,25 +780,24 @@ renderMobileNavigation() {
 renderMarkdown(content) {
     if (!content) return '';
 
-    const escapeHtml = (text) => {
-        const div = document.createElement('div');
-        div.textContent = text;
-        return div.innerHTML;
-    };
+const escapeHTML = (text) => {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+};
 
-    // Use escapeHtml here on content parts where needed (e.g. paragraphs) to prevent HTML injection
+function parseContent(content) {
     let html = content
-        // Code blocks with language detection
         .replace(/```(\w+)?\n([\s\S]*?)```/g, (match, lang, code) => {
             const language = lang || 'text';
-            const highlightedCode = this.highlightCode(code.trim(), language);
+            const highlightedCode = highlightCode(code.trim(), language);
             return `<div class="code-block" data-language="${language}">
-                        <div class="code-header"><span class="code-lang">${this.escapeHTML(language)}</span></div>
-                        <pre><code class="language-${this.escapeHTML(language)}">${highlightedCode}</code></pre>
+                        <div class="code-header"><span class="code-lang">${escapeHTML(language)}</span></div>
+                        <pre><code class="language-${escapeHTML(language)}">${highlightedCode}</code></pre>
                     </div>`;
         })
         // Inline code
-        .replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>')
+        .replace(/`([^`]+)`/g, (m, p1) => `<code class="inline-code">${escapeHTML(p1)}</code>`)
         // Bold text
         .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
         // Italic text
@@ -833,8 +832,11 @@ renderMarkdown(content) {
 
     return html;
 }
-highlightCode(code, language) {
-    let highlighted = code;
+
+function highlightCode(code, language) {
+    const escaped = escapeHTML(code);
+
+    let highlighted = escaped;
 
     if (language === 'lua') {
         highlighted = highlighted
@@ -850,19 +852,9 @@ highlightCode(code, language) {
             .replace(/\b\d+\.?\d*\b/g, '<span class="number">$&</span>');
     }
 
-    return highlighted
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#39;');
+    return highlighted;
 }
 
-escapeHTML(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
-}
     
     updateActiveNavItem(sectionId, subsectionId = null) {
         // Remove all active classes
