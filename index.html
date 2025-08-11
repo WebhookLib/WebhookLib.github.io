@@ -279,7 +279,20 @@ end)</code></pre>
             </div>
         </div>
     </footer>
+<script>
+  function isMobile() {
+    return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  }
 
+  window.addEventListener('DOMContentLoaded', () => {
+    if (isMobile()) {
+      const luaCodeBlock = document.getElementById('luaCodeBlock');
+      if (luaCodeBlock) {
+        luaCodeBlock.style.display = 'none';
+      }
+    }
+  });
+</script>
     <script src="script.js"></script>
 </body>
 </html>
