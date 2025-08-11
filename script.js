@@ -677,193 +677,206 @@ class DocumentationSystem {
         this.updateActiveNavItem(sectionId, subsectionId);
     }
 
-    renderSection(section, targetSubsectionId = null) {
-        const content = document.getElementById('docsContent');
-        if (!content) return;
+renderSection(section, targetSubsectionId = null) {
+    const content = document.getElementById('docsContent');
+    if (!content) return;
 
-        let html = '<div class="section-header"><h1>' + section.title + '</h1><p class="section-description">' + section.content + '</p></div>';
+    let html = `<div class="section-header">
+                    <h1>${this.escapeHTML(section.title)}</h1>
+                    <p class="section-description">${this.escapeHTML(section.content)}</p>
+                </div>`;
 
-        if (section.subsections) {
-            section.subsections.forEach((subsection, index) => {
-                const subsectionId = this.createSubsectionId(subsection.title);
-                html += '<section id="' + subsectionId + '" class="subsection">';
-                html += '<h2>' + subsection.title + '</h2>';
-                html += '<div class="subsection-content">' + this.renderMarkdown(subsection.content) + '</div>';
-                if (index < section.subsections.length - 1) {
-                    html += '<hr class="subsection-divider">';
-                }
-                html += '</section>';
-            });
-        }
-
-        // Add navigation buttons for mobile
-        if (MobileUtils.isMobile()) {
-            html += this.renderMobileNavigation();
-        }
-
-        content.innerHTML = html;
-        
-        // Initialize code copy buttons
-        this.initCodeCopyButtons();
-        
-        // Enhanced smooth scrolling with mobile considerations
-        if (targetSubsectionId) {
-            requestAnimationFrame(() => {
-                const element = document.getElementById(targetSubsectionId);
-                if (element) {
-                    const offset = MobileUtils.isMobile() ? 80 : 60;
-                    const elementPosition = element.getBoundingClientRect().top;
-                    const offsetPosition = elementPosition + window.pageYOffset - offset;
-
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        } else {
-            content.scrollTop = 0;
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-    }
-
-    initCodeCopyButtons() {
-        const codeBlocks = document.querySelectorAll('.code-block');
-        codeBlocks.forEach(block => {
-            if (!block.querySelector('.copy-btn')) {
-                const button = document.createElement('button');
-                button.className = 'copy-btn';
-                button.textContent = 'Copy';
-                button.setAttribute('onclick', 'copyCode(this)');
-                button.setAttribute('aria-label', 'Copy code to clipboard');
-                
-                const header = block.querySelector('.code-header') || block;
-                if (block.querySelector('.code-header')) {
-                    header.appendChild(button);
-                } else {
-                    // Create header if it doesn't exist
-                    const newHeader = document.createElement('div');
-                    newHeader.className = 'code-header';
-                    newHeader.innerHTML = '<span class="code-lang">Code</span>';
-                    newHeader.appendChild(button);
-                    block.insertBefore(newHeader, block.firstChild);
-                }
+    if (section.subsections) {
+        section.subsections.forEach((subsection, index) => {
+            const subsectionId = this.createSubsectionId(subsection.title);
+            html += `<section id="${subsectionId}" class="subsection">
+                        <h2>${this.escapeHTML(subsection.title)}</h2>
+                        <div class="subsection-content">${this.renderMarkdown(subsection.content)}</div>
+                    </section>`;
+            if (index < section.subsections.length - 1) {
+                html += '<hr class="subsection-divider">';
             }
         });
     }
 
-    renderMobileNavigation() {
-        const currentIndex = this.docs.sections.findIndex(s => s.id === this.currentSection);
-        const prevSection = currentIndex > 0 ? this.docs.sections[currentIndex - 1] : null;
-        const nextSection = currentIndex < this.docs.sections.length - 1 ? this.docs.sections[currentIndex + 1] : null;
-
-        let html = '<div class="mobile-nav-buttons">';
-        
-        if (prevSection) {
-            html += '<button class="nav-button prev-button" onclick="window.docsSystem.loadSection(\'' + prevSection.id + '\')">';
-            html += '<span class="nav-button-icon">←</span>';
-            html += '<div class="nav-button-text"><small>Previous</small><span>' + prevSection.title + '</span></div>';
-            html += '</button>';
-        }
-        
-        if (nextSection) {
-            html += '<button class="nav-button next-button" onclick="window.docsSystem.loadSection(\'' + nextSection.id + '\')">';
-            html += '<div class="nav-button-text"><small>Next</small><span>' + nextSection.title + '</span></div>';
-            html += '<span class="nav-button-icon">→</span>';
-            html += '</button>';
-        }
-        
-        html += '</div>';
-        return html;
+    // Add navigation buttons for mobile
+    if (MobileUtils.isMobile()) {
+        html += this.renderMobileNavigation();
     }
 
-    renderMarkdown(content) {
-        if (!content) return '';
-        
-        const escapeHtml = (text) => {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
-        };
-        
-        // Enhanced markdown parser with better mobile formatting
-        let html = content
-            // Code blocks with language detection
-            .replace(/```(\w+)?\n([\s\S]*?)```/g, (match, lang, code) => {
-                const language = lang || 'text';
-                const highlightedCode = this.highlightCode(code.trim(), language);
-                return '<div class="code-block" data-language="' + language + '"><div class="code-header"><span class="code-lang">' + language + '</span></div><pre><code class="language-' + language + '">' + highlightedCode + '</code></pre></div>';
-            })
-            // Inline code
-            .replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>')
-            // Bold text
-            .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-            // Italic text
-            .replace(/\*([^*]+)\*/g, '<em>$1</em>')
-            // Headers
-            .replace(/^### (.+)$/gm, '<h4>$1</h4>')
-            .replace(/^## (.+)$/gm, '<h3>$1</h3>')
-            .replace(/^# (.+)$/gm, '<h2>$1</h2>')
-            // Links
-            .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
-            // Lists
-            .replace(/^- (.+)$/gm, '<li>$1</li>')
-            .replace(/(<li>.*<\/li>\s*)+/gs, '<ul>$&</ul>')
-            .replace(/^\d+\. (.+)$/gm, '<li>$1</li>')
-            .replace(/(<li>.*<\/li>\s*)+/gs, (match) => {
-                if (match.includes('<ul>')) return match;
-                return '<ol>' + match + '</ol>';
-            })
-            // Blockquotes
-            .replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>')
-            // Horizontal rules
-            .replace(/^---$/gm, '<hr>')
-            // Paragraphs
-            .replace(/\n\n/g, '</p><p>')
-            .replace(/\n/g, '<br>');
+    content.innerHTML = html;
 
-        // Wrap in paragraph tags if not already wrapped
-        if (!html.startsWith('<')) {
-            html = '<p>' + html + '</p>';
+    // Initialize code copy buttons
+    this.initCodeCopyButtons();
+
+    // Enhanced smooth scrolling with mobile considerations
+    if (targetSubsectionId) {
+        requestAnimationFrame(() => {
+            const element = document.getElementById(targetSubsectionId);
+            if (element) {
+                const offset = MobileUtils.isMobile() ? 80 : 60;
+                const elementPosition = element.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    } else {
+        content.scrollTop = 0;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+}
+
+initCodeCopyButtons() {
+    const codeBlocks = document.querySelectorAll('.code-block');
+    codeBlocks.forEach(block => {
+        if (!block.querySelector('.copy-btn')) {
+            const button = document.createElement('button');
+            button.className = 'copy-btn';
+            button.textContent = 'Copy';
+            button.setAttribute('onclick', 'copyCode(this)');
+            button.setAttribute('aria-label', 'Copy code to clipboard');
+
+            const header = block.querySelector('.code-header');
+            if (header) {
+                header.appendChild(button);
+            } else {
+                // Create header if it doesn't exist
+                const newHeader = document.createElement('div');
+                newHeader.className = 'code-header';
+                newHeader.innerHTML = '<span class="code-lang">Code</span>';
+                newHeader.appendChild(button);
+                block.insertBefore(newHeader, block.firstChild);
+            }
         }
+    });
+}
 
-        return html;
+renderMobileNavigation() {
+    const currentIndex = this.docs.sections.findIndex(s => s.id === this.currentSection);
+    const prevSection = currentIndex > 0 ? this.docs.sections[currentIndex - 1] : null;
+    const nextSection = currentIndex < this.docs.sections.length - 1 ? this.docs.sections[currentIndex + 1] : null;
+
+    let html = '<div class="mobile-nav-buttons">';
+
+    if (prevSection) {
+        html += `<button class="nav-button prev-button" onclick="window.docsSystem.loadSection('${prevSection.id}')">
+                    <span class="nav-button-icon">←</span>
+                    <div class="nav-button-text"><small>Previous</small><span>${this.escapeHTML(prevSection.title)}</span></div>
+                </button>`;
     }
 
-    highlightCode(code, language) {
-        // Simple syntax highlighting for common languages
-        const escapeHtml = (text) => {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
-        };
-
-        const escaped = escapeHtml(code);
-
-        if (language === 'lua') {
-            return escaped
-                // Keywords
-                .replace(/\b(local|function|end|if|then|else|elseif|while|for|do|repeat|until|break|return|and|or|not|true|false|nil)\b/g, '<span class="keyword">$1</span>')
-                // Strings
-                .replace(/(["'])((?:\\.|(?!\1)[^\\])*?)\1/g, '<span class="string">$1$2$1</span>')
-                // Comments
-                .replace(/(--.*$)/gm, '<span class="comment">$1</span>')
-                // Numbers
-                .replace(/\b\d+\.?\d*\b/g, '<span class="number">$&</span>');
-        } else if (language === 'javascript' || language === 'js') {
-            return escaped
-                // Keywords
-                .replace(/\b(function|const|let|var|if|else|for|while|do|switch|case|break|continue|return|try|catch|finally|class|extends|import|export|default|async|await|true|false|null|undefined)\b/g, '<span class="keyword">$1</span>')
-                // Strings
-                .replace(/(["'`])((?:\\.|(?!\1)[^\\])*?)\1/g, '<span class="string">$1$2$1</span>')
-                // Comments
-                .replace(/(\/\/.*$|\/\*[\s\S]*?\*\/)/gm, '<span class="comment">$1</span>')
-                // Numbers
-                .replace(/\b\d+\.?\d*\b/g, '<span class="number">$&</span>');
-        }
-
-        return escaped;
+    if (nextSection) {
+        html += `<button class="nav-button next-button" onclick="window.docsSystem.loadSection('${nextSection.id}')">
+                    <div class="nav-button-text"><small>Next</small><span>${this.escapeHTML(nextSection.title)}</span></div>
+                    <span class="nav-button-icon">→</span>
+                </button>`;
     }
+
+    html += '</div>';
+    return html;
+}
+
+renderMarkdown(content) {
+    if (!content) return '';
+
+    const escapeHtml = (text) => {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    };
+
+    // Use escapeHtml here on content parts where needed (e.g. paragraphs) to prevent HTML injection
+    let html = content
+        // Code blocks with language detection
+        .replace(/```(\w+)?\n([\s\S]*?)```/g, (match, lang, code) => {
+            const language = lang || 'text';
+            const highlightedCode = this.highlightCode(code.trim(), language);
+            return `<div class="code-block" data-language="${language}">
+                        <div class="code-header"><span class="code-lang">${this.escapeHTML(language)}</span></div>
+                        <pre><code class="language-${this.escapeHTML(language)}">${highlightedCode}</code></pre>
+                    </div>`;
+        })
+        // Inline code
+        .replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>')
+        // Bold text
+        .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+        // Italic text
+        .replace(/\*([^*]+)\*/g, '<em>$1</em>')
+        // Headers
+        .replace(/^### (.+)$/gm, '<h4>$1</h4>')
+        .replace(/^## (.+)$/gm, '<h3>$1</h3>')
+        .replace(/^# (.+)$/gm, '<h2>$1</h2>')
+        // Links
+        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
+        // Lists (unordered)
+        .replace(/^- (.+)$/gm, '<li>$1</li>')
+        .replace(/(<li>.*<\/li>\s*)+/gs, '<ul>$&</ul>')
+        // Lists (ordered)
+        .replace(/^\d+\. (.+)$/gm, '<li>$1</li>')
+        .replace(/(<li>.*<\/li>\s*)+/gs, (match) => {
+            if (match.includes('<ul>')) return match;
+            return `<ol>${match}</ol>`;
+        })
+        // Blockquotes
+        .replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>')
+        // Horizontal rules
+        .replace(/^---$/gm, '<hr>')
+        // Paragraphs and line breaks
+        .replace(/\n\n/g, '</p><p>')
+        .replace(/\n/g, '<br>');
+
+    // Wrap in paragraph tags if not already wrapped
+    if (!html.startsWith('<')) {
+        html = `<p>${html}</p>`;
+    }
+
+    return html;
+}
+
+highlightCode(code, language) {
+    const escapeHtml = (text) => {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    };
+
+    const escaped = escapeHtml(code);
+
+    if (language === 'lua') {
+        return escaped
+            // Keywords
+            .replace(/\b(local|function|end|if|then|else|elseif|while|for|do|repeat|until|break|return|and|or|not|true|false|nil)\b/g, '<span class="keyword">$1</span>')
+            // Strings
+            .replace(/(["'])((?:\\.|(?!\1)[^\\])*?)\1/g, '<span class="string">$1$2$1</span>')
+            // Comments
+            .replace(/(--.*$)/gm, '<span class="comment">$1</span>')
+            // Numbers
+            .replace(/\b\d+\.?\d*\b/g, '<span class="number">$&</span>');
+    } else if (language === 'javascript' || language === 'js') {
+        return escaped
+            // Keywords
+            .replace(/\b(function|const|let|var|if|else|for|while|do|switch|case|break|continue|return|try|catch|finally|class|extends|import|export|default|async|await|true|false|null|undefined)\b/g, '<span class="keyword">$1</span>')
+            // Strings
+            .replace(/(["'`])((?:\\.|(?!\1)[^\\])*?)\1/g, '<span class="string">$1$2$1</span>')
+            // Comments
+            .replace(/(\/\/.*$|\/\*[\s\S]*?\*\/)/gm, '<span class="comment">$1</span>')
+            // Numbers
+            .replace(/\b\d+\.?\d*\b/g, '<span class="number">$&</span>');
+    }
+
+    return escaped;
+}
+
+escapeHTML(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
 
     updateActiveNavItem(sectionId, subsectionId = null) {
         // Remove all active classes
