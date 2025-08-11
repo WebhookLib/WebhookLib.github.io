@@ -82,6 +82,7 @@ body {
     line-height: 1.6;
     font-size: 16px;
     transition: background-color var(--transition-normal), color var(--transition-normal);
+    overflow-x: hidden; /* منع الانزلاق الأفقي */
 }
 
 /* Typography */
@@ -89,6 +90,7 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 600;
     line-height: 1.25;
     margin-bottom: var(--spacing-md);
+    word-wrap: break-word; /* لتجنب تجاوز النص للحدود */
 }
 
 h1 { font-size: 2.5rem; }
@@ -100,6 +102,7 @@ h6 { font-size: 1rem; }
 
 p {
     margin-bottom: var(--spacing-md);
+    word-wrap: break-word;
 }
 
 a {
@@ -117,6 +120,7 @@ a:hover {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 var(--spacing-lg);
+    width: 100%;
 }
 
 /* Navigation */
@@ -137,6 +141,7 @@ a:hover {
     padding: var(--spacing-md) var(--spacing-lg);
     max-width: 1200px;
     margin: 0 auto;
+    width: 100%;
 }
 
 .nav-logo {
@@ -161,6 +166,7 @@ a:hover {
 
 .logo-icon {
     height: 32px;
+    width: auto;
     display: none;
 }
 
@@ -183,6 +189,12 @@ a:hover {
     border-bottom-color: var(--blue-500);
 }
 
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
 .theme-toggle, .github-btn {
     background: none;
     border: 2px solid var(--border-light);
@@ -194,6 +206,7 @@ a:hover {
     justify-content: center;
     cursor: pointer;
     transition: all var(--transition-fast);
+    flex-shrink: 0;
 }
 
 .theme-toggle:hover, .github-btn:hover {
@@ -232,6 +245,7 @@ a:hover {
     gap: 4px;
     background: none;
     border: none;
+    flex-shrink: 0;
 }
 
 .mobile-menu-toggle span {
@@ -255,7 +269,7 @@ a:hover {
 
 .mobile-nav {
     display: none;
-    position: absolute;
+    position: fixed;
     top: 100%;
     left: 0;
     right: 0;
@@ -263,6 +277,8 @@ a:hover {
     border-bottom: 1px solid var(--border-light);
     box-shadow: var(--shadow-lg);
     z-index: 99;
+    max-height: calc(100vh - 73px);
+    overflow-y: auto;
 }
 
 .mobile-nav.open {
@@ -302,6 +318,7 @@ a:hover {
 .hero {
     background: linear-gradient(135deg, var(--blue-50) 0%, var(--bg-secondary) 100%);
     padding: var(--spacing-3xl) 0;
+    min-height: auto;
 }
 
 [data-theme="dark"] .hero {
@@ -316,6 +333,11 @@ a:hover {
     grid-template-columns: 1fr 1fr;
     gap: var(--spacing-3xl);
     align-items: center;
+}
+
+.hero-content {
+    display: flex;
+    flex-direction: column;
 }
 
 .hero-title {
@@ -359,6 +381,8 @@ a:hover {
     border: 2px solid transparent;
     cursor: pointer;
     font-size: 1rem;
+    white-space: nowrap;
+    min-height: 44px; /* الحد الأدنى للمس على الهواتف */
 }
 
 .btn-primary {
@@ -398,6 +422,7 @@ a:hover {
     border-radius: 12px;
     overflow: hidden;
     box-shadow: var(--shadow-lg);
+    width: 100%;
 }
 
 .code-header {
@@ -424,6 +449,7 @@ a:hover {
     font-size: 0.75rem;
     cursor: pointer;
     transition: all var(--transition-fast);
+    min-height: 32px;
 }
 
 .copy-btn:hover {
@@ -467,6 +493,9 @@ a:hover {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: var(--spacing-xl);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
 }
 
 .feature-card {
@@ -518,8 +547,11 @@ a:hover {
 
 .examples-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: var(--spacing-xl);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
 }
 
 .example-card {
@@ -529,6 +561,7 @@ a:hover {
     overflow: hidden;
     box-shadow: var(--shadow-md);
     transition: all var(--transition-normal);
+    width: 100%;
 }
 
 .example-card:hover {
@@ -554,6 +587,12 @@ a:hover {
     padding: var(--spacing-3xl) 0;
     background: linear-gradient(135deg, var(--blue-600) 0%, var(--blue-700) 100%);
     text-align: center;
+}
+
+.cta-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
 }
 
 .cta-content h2 {
@@ -593,6 +632,9 @@ a:hover {
     align-items: center;
     justify-content: space-between;
     margin-bottom: var(--spacing-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
 }
 
 .footer-logo {
@@ -625,6 +667,10 @@ a:hover {
     text-align: center;
     padding-top: var(--spacing-lg);
     border-top: 1px solid var(--border-light);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: var(--spacing-lg);
+    padding-right: var(--spacing-lg);
 }
 
 .footer-bottom p {
@@ -649,6 +695,7 @@ a:hover {
     top: 73px;
     height: calc(100vh - 73px);
     transition: all var(--transition-normal);
+    flex-shrink: 0;
 }
 
 .sidebar-content {
@@ -738,12 +785,14 @@ a:hover {
 .docs-main {
     flex: 1;
     overflow-y: auto;
+    min-width: 0;
 }
 
 .docs-content {
     max-width: 800px;
     padding: var(--spacing-2xl);
     margin: 0 auto;
+    width: 100%;
 }
 
 .docs-content h1 {
@@ -811,7 +860,19 @@ a:hover {
 }
 
 /* Mobile Responsive Design */
+@media (max-width: 1024px) {
+    .features-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: var(--spacing-lg);
+    }
+    
+    .examples-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 @media (max-width: 768px) {
+    /* Navigation fixes */
     .nav-links {
         display: none;
     }
@@ -820,48 +881,136 @@ a:hover {
         display: flex;
     }
     
+    .nav-container {
+        padding: var(--spacing-md);
+    }
+    
     .logo-full {
         display: none;
     }
     
     .logo-icon {
         display: block;
-        width: 50px;    
-        height: auto;
+        height: 40px;
+        width: auto;
+    }
+    
+    /* Hero section fixes */
+    .hero {
+        padding: var(--spacing-2xl) 0;
     }
     
     .hero-container {
         grid-template-columns: 1fr;
-        gap: var(--spacing-2xl);
+        gap: var(--spacing-xl);
         text-align: center;
+        padding: 0 var(--spacing-md);
     }
     
     .hero-title {
-        font-size: 2rem;
+        font-size: 2.25rem;
+        margin-bottom: var(--spacing-md);
     }
     
     .hero-subtitle {
-        font-size: 1.25rem;
+        font-size: 1.125rem;
+    }
+    
+    .hero-description {
+        font-size: 1rem;
+        margin-bottom: var(--spacing-lg);
+    }
+    
+    .hero-buttons {
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--spacing-sm);
+    }
+    
+    .hero-buttons .btn {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    /* Features section fixes */
+    .features {
+        padding: var(--spacing-2xl) 0;
     }
     
     .features-grid {
         grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+        padding: 0 var(--spacing-md);
+    }
+    
+    .feature-card {
+        padding: var(--spacing-lg);
+    }
+    
+    /* Examples section fixes */
+    .examples {
+        padding: var(--spacing-2xl) 0;
     }
     
     .examples-grid {
         grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+        padding: 0 var(--spacing-md);
     }
     
     .example-card {
         min-width: 0;
+        width: 100%;
     }
     
+    /* Code block fixes */
+    .code-header {
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+    
+    .code-block pre {
+        padding: var(--spacing-md);
+        font-size: 0.8rem;
+    }
+    
+    /* CTA section fixes */
+    .cta {
+        padding: var(--spacing-2xl) 0;
+    }
+    
+    .cta-content {
+        padding: 0 var(--spacing-md);
+    }
+    
+    .cta-content h2 {
+        font-size: 2rem;
+    }
+    
+    .cta-content p {
+        font-size: 1rem;
+    }
+    
+    /* Footer fixes */
     .footer-content {
         flex-direction: column;
         gap: var(--spacing-lg);
         text-align: center;
+        padding: 0 var(--spacing-md);
+        margin-bottom: var(--spacing-lg);
     }
     
+    .footer-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: var(--spacing-lg);
+    }
+    
+    .footer-bottom {
+        padding: var(--spacing-lg) var(--spacing-md) 0;
+    }
+    
+    /* Documentation fixes */
     .docs-container {
         flex-direction: column;
     }
@@ -869,11 +1018,13 @@ a:hover {
     .docs-sidebar {
         position: fixed;
         top: 73px;
-        left: -300px;
-        width: 300px;
+        left: -100%;
+        width: 100%;
+        max-width: 320px;
         height: calc(100vh - 73px);
         z-index: 200;
         transition: left var(--transition-normal);
+        box-shadow: var(--shadow-xl);
     }
     
     .docs-sidebar.open {
@@ -885,67 +1036,251 @@ a:hover {
     }
     
     .docs-content {
-        padding: var(--spacing-lg);
+        padding: var(--spacing-lg) var(--spacing-md);
     }
     
+    /* Typography fixes */
     .section-title {
         font-size: 2rem;
+        margin-bottom: var(--spacing-2xl);
     }
     
-    .hero-buttons {
-        justify-content: center;
+    /* Button fixes */
+    .btn {
+        min-height: 48px;
+        padding: var(--spacing-md) var(--spacing-lg);
+        font-size: 0.95rem;
     }
     
-    .cta-content h2 {
-        font-size: 2rem;
+    .btn-large {
+        padding: var(--spacing-lg) var(--spacing-xl);
+        font-size: 1rem;
     }
     
-    .container, .nav-container {
-        padding-left: var(--spacing-md);
-        padding-right: var(--spacing-md);
+    /* Mobile navigation positioning fix */
+    .mobile-nav {
+        top: 73px;
+    }
+    
+    /* Container padding fixes */
+    .container {
+        padding: 0 var(--spacing-md);
     }
 }
 
 @media (max-width: 480px) {
-    .logo-full {
-        width: 100px;
+    /* Extra small screens */
+    .nav-container {
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+    
+    .logo-icon {
+        height: 36px;
+    }
+    
+    .theme-toggle, .github-btn {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .mobile-menu-toggle {
+        padding: var(--spacing-xs);
+    }
+    
+    /* Hero section for very small screens */
+    .hero {
+        padding: var(--spacing-xl) 0;
+    }
+    
+    .hero-container {
+        padding: 0 var(--spacing-sm);
     }
     
     .hero-title {
-        font-size: 1.75rem;
+        font-size: 1.875rem;
+        line-height: 1.2;
     }
     
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+    
+    .hero-description {
+        font-size: 0.95rem;
+    }
+    
+    /* Typography adjustments */
     .section-title {
         font-size: 1.75rem;
     }
     
+    h1 { font-size: 1.875rem; }
+    h2 { font-size: 1.5rem; }
+    h3 { font-size: 1.25rem; }
+    
+    /* Button adjustments */
     .btn {
-        padding: var(--spacing-md);
+        padding: var(--spacing-sm) var(--spacing-lg);
         font-size: 0.875rem;
+        min-height: 44px;
     }
     
     .btn-large {
         padding: var(--spacing-md) var(--spacing-lg);
-        font-size: 1rem;
+        font-size: 0.95rem;
     }
     
-    .docs-content {
+    /* Feature cards */
+    .feature-card {
         padding: var(--spacing-md);
     }
     
-    .docs-content h1 {
-        font-size: 1.75rem;
-    }
-    
-    .docs-content h2 {
+    .feature-icon {
+        width: 40px;
+        height: 40px;
         font-size: 1.5rem;
     }
     
-    .examples-grid {
-        grid-template-columns: 1fr;
+    /* Code blocks */
+    .code-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-sm);
     }
     
-    .example-card {
-        min-width: 0;
+    .copy-btn {
+        align-self: flex-end;
+    }
+    
+    .code-block pre {
+        padding: var(--spacing-sm);
+        font-size: 0.75rem;
+    }
+    
+    /* Documentation adjustments */
+    .docs-content {
+        padding: var(--spacing-md) var(--spacing-sm);
+    }
+    
+    .docs-content h1 {
+        font-size: 1.5rem;
+    }
+    
+    .docs-content h2 {
+        font-size: 1.25rem;
+    }
+    
+    /* CTA section */
+    .cta-content h2 {
+        font-size: 1.75rem;
+    }
+    
+    .cta-content p {
+        font-size: 0.95rem;
+    }
+    
+    /* Footer adjustments */
+    .footer {
+        padding: var(--spacing-xl) 0;
+    }
+    
+    .footer-content {
+        padding: 0 var(--spacing-sm);
+    }
+    
+    .footer-links {
+        gap: var(--spacing-md);
+    }
+    
+    .footer-bottom {
+        padding: var(--spacing-md) var(--spacing-sm) 0;
+    }
+    
+    /* Mobile sidebar adjustments */
+    .docs-sidebar {
+        max-width: 280px;
+    }
+    
+    .sidebar-content {
+        gap: var(--spacing-md);
+    }
+    
+    .search-input {
+        padding: var(--spacing-sm);
+    }
+    
+    /* Mobile navigation improvements */
+    .mobile-nav-links {
+        padding: var(--spacing-md);
+        gap: var(--spacing-sm);
+    }
+    
+    .mobile-nav-link {
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+    
+    .mobile-nav-buttons {
+        padding: var(--spacing-sm) 0 var(--spacing-md);
+        gap: var(--spacing-sm);
+    }
+    
+    .mobile-nav-buttons .theme-toggle,
+    .mobile-nav-buttons .github-btn {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+/* Landscape orientation fixes for mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+    .hero {
+        padding: var(--spacing-xl) 0;
+    }
+    
+    .features, .examples, .cta {
+        padding: var(--spacing-xl) 0;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .section-title {
+        font-size: 1.75rem;
+        margin-bottom: var(--spacing-xl);
+    }
+}
+
+/* High DPI screens adjustments */
+@media (min-resolution: 2dppx) {
+    .github-btn img {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+/* Dark mode specific mobile adjustments */
+@media (max-width: 768px) {
+    [data-theme="dark"] .mobile-nav {
+        background-color: var(--bg-primary);
+        border-bottom-color: var(--border-light);
+    }
+    
+    [data-theme="dark"] .docs-sidebar {
+        background-color: var(--bg-secondary);
+        border-right-color: var(--border-light);
     }
 }
