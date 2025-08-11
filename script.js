@@ -1,6 +1,3 @@
-// Enhanced Mobile-Optimized Documentation Script
-
-// Utility functions for mobile detection and touch handling
 const MobileUtils = {
     isMobile: () => window.innerWidth <= 768,
     isTouch: () => 'ontouchstart' in window || navigator.maxTouchPoints > 0,
