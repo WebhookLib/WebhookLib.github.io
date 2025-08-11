@@ -84,11 +84,10 @@ class ThemeManager {
         icons.forEach(icon => {
             if (theme === 'dark') {
                 // Moon icon for dark theme
-                icon.innerHTML = `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>`;
+                icon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
             } else {
                 // Sun icon for light theme  
-                icon.innerHTML = `<circle cx="12" cy="12" r="5"/>
-                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>`;
+                icon.innerHTML = '<circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>';
             }
         });
     }
@@ -407,7 +406,7 @@ function copyCode(button) {
     const showFeedback = (message, success = true) => {
         const originalText = button.textContent;
         button.textContent = message;
-        button.style.backgroundColor = success ? 'var(--success, #10b981)' : 'var(--error, #ef4444)';
+        button.style.backgroundColor = success ? '#10b981' : '#ef4444';
         button.style.color = 'white';
         button.style.transform = 'scale(0.95)';
         
@@ -462,7 +461,7 @@ function fallbackCopyTextToClipboard(text, button) {
 function showCopyFeedback(button, message, success) {
     const originalText = button.textContent;
     button.textContent = message;
-    button.style.backgroundColor = success ? 'var(--success, #10b981)' : 'var(--error, #ef4444)';
+    button.style.backgroundColor = success ? '#10b981' : '#ef4444';
     button.style.color = 'white';
     
     setTimeout(() => {
@@ -507,14 +506,7 @@ class DocumentationSystem {
     showLoadingState() {
         const content = document.getElementById('docsContent');
         if (content) {
-            content.innerHTML = `
-                <div class="loading-container">
-                    <div class="loading-spinner">
-                        <div class="spinner"></div>
-                    </div>
-                    <p class="loading-text">Loading documentation...</p>
-                </div>
-            `;
+            content.innerHTML = '<div class="loading-container"><div class="loading-spinner"><div class="spinner"></div></div><p class="loading-text">Loading documentation...</p></div>';
         }
     }
 
@@ -556,45 +548,11 @@ class DocumentationSystem {
                     subsections: [
                         {
                             title: 'Installation',
-                            content: `To install WebhookLib in your Roblox project:
-
-\`\`\`lua
--- Method 1: Direct require
-local WebhookLib = require(game.ServerScriptService.WebhookLib)
-
--- Method 2: Using a module ID
-local WebhookLib = require(1234567890) -- Replace with actual module ID
-\`\`\`
-
-**Note:** Make sure HTTP requests are enabled in your game settings.`
+                            content: 'To install WebhookLib in your Roblox project:\n\n```lua\n-- Method 1: Direct require\nlocal WebhookLib = require(game.ServerScriptService.WebhookLib)\n\n-- Method 2: Using a module ID\nlocal WebhookLib = require(1234567890) -- Replace with actual module ID\n```\n\n**Note:** Make sure HTTP requests are enabled in your game settings.'
                         },
                         {
                             title: 'Quick Start',
-                            content: `Here's a simple example to get you started:
-
-\`\`\`lua
-local WebhookLib = require(game.ServerScriptService.WebhookLib)
-
--- Create a new webhook
-local webhook = WebhookLib.new("YOUR_WEBHOOK_URL")
-
--- Send a simple message
-webhook:Send("Hello, Discord!")
-
--- Send a rich embed
-webhook:SendEmbed({
-    title = "Game Event",
-    description = "A player joined the game!",
-    color = 0x00ff00,
-    fields = {
-        {
-            name = "Player",
-            value = "ExamplePlayer",
-            inline = true
-        }
-    }
-})
-\`\`\``
+                            content: 'Here is a simple example to get you started:\n\n```lua\nlocal WebhookLib = require(game.ServerScriptService.WebhookLib)\n\n-- Create a new webhook\nlocal webhook = WebhookLib.new("YOUR_WEBHOOK_URL")\n\n-- Send a simple message\nwebhook:Send("Hello, Discord!")\n\n-- Send a rich embed\nwebhook:SendEmbed({\n    title = "Game Event",\n    description = "A player joined the game!",\n    color = 0x00ff00,\n    fields = {\n        {\n            name = "Player",\n            value = "ExamplePlayer",\n            inline = true\n        }\n    }\n})\n```'
                         }
                     ]
                 },
@@ -605,129 +563,7 @@ webhook:SendEmbed({
                     subsections: [
                         {
                             title: 'Webhook Class',
-                            content: `The main Webhook class provides all functionality for sending Discord webhooks.
-
-## Constructor
-
-\`\`\`lua
-local webhook = WebhookLib.new(url, options)
-\`\`\`
-
-**Parameters:**
-- \`url\` (string): The Discord webhook URL
-- \`options\` (table, optional): Configuration options
-
-**Options:**
-- \`username\` (string): Override webhook username
-- \`avatar_url\` (string): Override webhook avatar
-- \`rate_limit\` (number): Rate limit in seconds (default: 1)`
-                        },
-                        {
-                            title: 'Methods',
-                            content: `## Send(content, username, avatar_url)
-
-Sends a simple text message.
-
-\`\`\`lua
-webhook:Send("Hello World!")
-webhook:Send("Custom message", "CustomBot", "https://example.com/avatar.png")
-\`\`\`
-
-## SendEmbed(embed, content, username, avatar_url)
-
-Sends a rich embed message.
-
-\`\`\`lua
-webhook:SendEmbed({
-    title = "Embed Title",
-    description = "Embed description",
-    color = 0x0099ff,
-    timestamp = os.date("!%Y-%m-%dT%H:%M:%SZ"),
-    footer = {
-        text = "Footer text",
-        icon_url = "https://example.com/footer.png"
-    },
-    fields = {
-        {name = "Field 1", value = "Value 1", inline = true},
-        {name = "Field 2", value = "Value 2", inline = true}
-    }
-})
-\`\`\``
-                        }
-                    ]
-                },
-                {
-                    id: 'examples',
-                    title: 'Examples',
-                    content: 'Practical examples and use cases for WebhookLib.',
-                    subsections: [
-                        {
-                            title: 'Player Events',
-                            content: `Track player join/leave events:
-
-\`\`\`lua
-local WebhookLib = require(game.ServerScriptService.WebhookLib)
-local webhook = WebhookLib.new("YOUR_WEBHOOK_URL")
-
-game.Players.PlayerAdded:Connect(function(player)
-    webhook:SendEmbed({
-        title = "Player Joined",
-        description = player.Name .. " has joined the game!",
-        color = 0x00ff00,
-        timestamp = os.date("!%Y-%m-%dT%H:%M:%SZ"),
-        thumbnail = {
-            url = "https://www.roblox.com/headshot-thumbnail/image?userId=" .. player.UserId .. "&width=150&height=150&format=png"
-        }
-    })
-end)
-
-game.Players.PlayerRemoving:Connect(function(player)
-    webhook:SendEmbed({
-        title = "Player Left",
-        description = player.Name .. " has left the game.",
-        color = 0xff0000,
-        timestamp = os.date("!%Y-%m-%dT%H:%M:%SZ")
-    })
-end)
-\`\`\``
-                        },
-                        {
-                            title: 'Error Logging',
-                            content: `Log errors and important events:
-
-\`\`\`lua
-local function logError(errorMessage, scriptName)
-    webhook:SendEmbed({
-        title = "⚠️ Error Occurred",
-        description = "An error occurred in the game.",
-        color = 0xff4444,
-        fields = {
-            {
-                name = "Error Message",
-                value = "\`\`\`" .. errorMessage .. "\`\`\`",
-                inline = false
-            },
-            {
-                name = "Script",
-                value = scriptName or "Unknown",
-                inline = true
-            },
-            {
-                name = "Time",
-                value = os.date("%Y-%m-%d %H:%M:%S"),
-                inline = true
-            }
-        },
-        timestamp = os.date("!%Y-%m-%dT%H:%M:%SZ")
-    })
-end
-
--- Usage
-pcall(function()
-    -- Your code here
-    someRiskyFunction()
-end) or logError("Failed to execute risky function", script.Name)
-\`\`\``
+                            content: 'The main Webhook class provides all functionality for sending Discord webhooks.\n\n## Constructor\n\n```lua\nlocal webhook = WebhookLib.new(url, options)\n```\n\n**Parameters:**\n- `url` (string): The Discord webhook URL\n- `options` (table, optional): Configuration options\n\n**Options:**\n- `username` (string): Override webhook username\n- `avatar_url` (string): Override webhook avatar\n- `rate_limit` (number): Rate limit in seconds (default: 1)'
                         }
                     ]
                 }
@@ -747,7 +583,7 @@ end) or logError("Failed to execute risky function", script.Name)
                 id: section.id,
                 title: section.title,
                 content: section.content,
-                searchText: `${section.title} ${section.content}`.toLowerCase()
+                searchText: (section.title + ' ' + section.content).toLowerCase()
             });
             
             // Add subsections to search index
@@ -760,7 +596,7 @@ end) or logError("Failed to execute risky function", script.Name)
                         id: subsectionId,
                         title: subsection.title,
                         content: subsection.content,
-                        searchText: `${subsection.title} ${subsection.content}`.toLowerCase()
+                        searchText: (subsection.title + ' ' + subsection.content).toLowerCase()
                     });
                 });
             }
@@ -774,17 +610,10 @@ end) or logError("Failed to execute risky function", script.Name)
         const navHTML = this.docs.sections.map(section => {
             const subsectionHTML = section.subsections ? section.subsections.map(subsection => {
                 const subsectionId = this.createSubsectionId(subsection.title);
-                return `<div class="nav-item nav-subsection" data-section="${section.id}" data-subsection="${subsectionId}">${subsection.title}</div>`;
+                return '<div class="nav-item nav-subsection" data-section="' + section.id + '" data-subsection="' + subsectionId + '">' + subsection.title + '</div>';
             }).join('') : '';
 
-            return `
-                <div class="nav-section">
-                    <div class="nav-item nav-section-title" data-section="${section.id}">${section.title}</div>
-                    <div class="nav-items">
-                        ${subsectionHTML}
-                    </div>
-                </div>
-            `;
+            return '<div class="nav-section"><div class="nav-item nav-section-title" data-section="' + section.id + '">' + section.title + '</div><div class="nav-items">' + subsectionHTML + '</div></div>';
         }).join('');
 
         nav.innerHTML = navHTML;
@@ -882,7 +711,7 @@ end) or logError("Failed to execute risky function", script.Name)
         this.currentSection = sectionId;
         
         if (updateURL) {
-            const url = subsectionId ? `#${sectionId}-${subsectionId}` : `#${sectionId}`;
+            const url = subsectionId ? '#' + sectionId + '-' + subsectionId : '#' + sectionId;
             history.pushState({}, '', url);
         }
 
@@ -894,23 +723,18 @@ end) or logError("Failed to execute risky function", script.Name)
         const content = document.getElementById('docsContent');
         if (!content) return;
 
-        let html = `
-            <div class="section-header">
-                <h1>${section.title}</h1>
-                <p class="section-description">${section.content}</p>
-            </div>
-        `;
+        let html = '<div class="section-header"><h1>' + section.title + '</h1><p class="section-description">' + section.content + '</p></div>';
 
         if (section.subsections) {
             section.subsections.forEach((subsection, index) => {
                 const subsectionId = this.createSubsectionId(subsection.title);
-                html += `
-                    <section id="${subsectionId}" class="subsection">
-                        <h2>${subsection.title}</h2>
-                        <div class="subsection-content">${this.renderMarkdown(subsection.content)}</div>
-                        ${index < section.subsections.length - 1 ? '<hr class="subsection-divider">' : ''}
-                    </section>
-                `;
+                html += '<section id="' + subsectionId + '" class="subsection">';
+                html += '<h2>' + subsection.title + '</h2>';
+                html += '<div class="subsection-content">' + this.renderMarkdown(subsection.content) + '</div>';
+                if (index < section.subsections.length - 1) {
+                    html += '<hr class="subsection-divider">';
+                }
+                html += '</section>';
             });
         }
 
@@ -920,6 +744,9 @@ end) or logError("Failed to execute risky function", script.Name)
         }
 
         content.innerHTML = html;
+        
+        // Initialize code copy buttons
+        this.initCodeCopyButtons();
         
         // Enhanced smooth scrolling with mobile considerations
         if (targetSubsectionId) {
@@ -940,9 +767,6 @@ end) or logError("Failed to execute risky function", script.Name)
             content.scrollTop = 0;
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-        
-        // Initialize code copy buttons
-        this.initCodeCopyButtons();
     }
 
     initCodeCopyButtons() {
@@ -975,32 +799,34 @@ end) or logError("Failed to execute risky function", script.Name)
         const prevSection = currentIndex > 0 ? this.docs.sections[currentIndex - 1] : null;
         const nextSection = currentIndex < this.docs.sections.length - 1 ? this.docs.sections[currentIndex + 1] : null;
 
-        return `
-            <div class="mobile-nav-buttons">
-                ${prevSection ? `
-                    <button class="nav-button prev-button" onclick="window.docsSystem.loadSection('${prevSection.id}')">
-                        <span class="nav-button-icon">←</span>
-                        <div class="nav-button-text">
-                            <small>Previous</small>
-                            <span>${prevSection.title}</span>
-                        </div>
-                    </button>
-                ` : ''}
-                ${nextSection ? `
-                    <button class="nav-button next-button" onclick="window.docsSystem.loadSection('${nextSection.id}')">
-                        <div class="nav-button-text">
-                            <small>Next</small>
-                            <span>${nextSection.title}</span>
-                        </div>
-                        <span class="nav-button-icon">→</span>
-                    </button>
-                ` : ''}
-            </div>
-        `;
+        let html = '<div class="mobile-nav-buttons">';
+        
+        if (prevSection) {
+            html += '<button class="nav-button prev-button" onclick="window.docsSystem.loadSection(\'' + prevSection.id + '\')">';
+            html += '<span class="nav-button-icon">←</span>';
+            html += '<div class="nav-button-text"><small>Previous</small><span>' + prevSection.title + '</span></div>';
+            html += '</button>';
+        }
+        
+        if (nextSection) {
+            html += '<button class="nav-button next-button" onclick="window.docsSystem.loadSection(\'' + nextSection.id + '\')">';
+            html += '<div class="nav-button-text"><small>Next</small><span>' + nextSection.title + '</span></div>';
+            html += '<span class="nav-button-icon">→</span>';
+            html += '</button>';
+        }
+        
+        html += '</div>';
+        return html;
     }
 
     renderMarkdown(content) {
         if (!content) return '';
+        
+        const escapeHtml = (text) => {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        };
         
         // Enhanced markdown parser with better mobile formatting
         let html = content
@@ -1008,14 +834,7 @@ end) or logError("Failed to execute risky function", script.Name)
             .replace(/```(\w+)?\n([\s\S]*?)```/g, (match, lang, code) => {
                 const language = lang || 'text';
                 const highlightedCode = this.highlightCode(code.trim(), language);
-                return `
-                    <div class="code-block" data-language="${language}">
-                        <div class="code-header">
-                            <span class="code-lang">${language}</span>
-                        </div>
-                        <pre><code class="language-${language}">${highlightedCode}</code></pre>
-                    </div>
-                `;
+                return '<div class="code-block" data-language="' + language + '"><div class="code-header"><span class="code-lang">' + language + '</span></div><pre><code class="language-' + language + '">' + highlightedCode + '</code></pre></div>';
             })
             // Inline code
             .replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>')
@@ -1031,10 +850,8 @@ end) or logError("Failed to execute risky function", script.Name)
             .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
             // Lists
             .replace(/^- (.+)$/gm, '<li>$1</li>')
-            .replace(/(<li>.*<\/li>\s*)+/gs, '<ul>        } else {
-            content.scrollTop = 0;
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }</ul>')
+            .replace(/(<li>.*<\/li>\s*)+/gs, '<ul>            // Links
+            .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')</ul>')
             .replace(/^\d+\. (.+)$/gm, '<li>$1</li>')
             .replace(/(<li>.*<\/li>\s*)+/gs, (match) => {
                 if (match.includes('<ul>')) return match;
@@ -1075,10 +892,8 @@ end) or logError("Failed to execute risky function", script.Name)
                 // Comments
                 .replace(/(--.*$)/gm, '<span class="comment">$1</span>')
                 // Numbers
-                .replace(/\b\d+\.?\d*\b/g, '<span class="number">        } else {
-            content.scrollTop = 0;
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }</span>');
+                .replace(/\b\d+\.?\d*\b/g, '<span class="number">            // Links
+            .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')</span>');
         } else if (language === 'javascript' || language === 'js') {
             return escaped
                 // Keywords
@@ -1088,10 +903,8 @@ end) or logError("Failed to execute risky function", script.Name)
                 // Comments
                 .replace(/(\/\/.*$|\/\*[\s\S]*?\*\/)/gm, '<span class="comment">$1</span>')
                 // Numbers
-                .replace(/\b\d+\.?\d*\b/g, '<span class="number">        } else {
-            content.scrollTop = 0;
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }</span>');
+                .replace(/\b\d+\.?\d*\b/g, '<span class="number">            // Links
+            .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')</span>');
         }
 
         return escaped;
@@ -1105,8 +918,8 @@ end) or logError("Failed to execute risky function", script.Name)
 
         // Add active class to current item
         const selector = subsectionId 
-            ? `[data-section="${sectionId}"][data-subsection="${subsectionId}"]`
-            : `[data-section="${sectionId}"]:not([data-subsection])`;
+            ? '[data-section="' + sectionId + '"][data-subsection="' + subsectionId + '"]'
+            : '[data-section="' + sectionId + '"]:not([data-subsection])';
         
         const activeItem = document.querySelector(selector);
         if (activeItem) {
@@ -1144,6 +957,7 @@ end) or logError("Failed to execute risky function", script.Name)
                 item.style.display = 'block';
                 item.classList.remove('search-highlight');
             });
+            this.hideSearchEmptyState();
             return;
         }
 
@@ -1171,10 +985,10 @@ end) or logError("Failed to execute risky function", script.Name)
             let sectionId;
             
             if (result.type === 'section') {
-                selector = `[data-section="${result.id}"]:not([data-subsection])`;
+                selector = '[data-section="' + result.id + '"]:not([data-subsection])';
                 sectionId = result.id;
             } else {
-                selector = `[data-section="${result.sectionId}"][data-subsection="${result.id}"]`;
+                selector = '[data-section="' + result.sectionId + '"][data-subsection="' + result.id + '"]';
                 sectionId = result.sectionId;
             }
             
@@ -1188,15 +1002,18 @@ end) or logError("Failed to execute risky function", script.Name)
 
         // Show sections that have visible items
         visibleSections.forEach(sectionId => {
-            const section = document.querySelector(`[data-section="${sectionId}"]`).closest('.nav-section');
-            if (section) {
-                section.style.display = 'block';
-                section.classList.remove('search-filtered');
-                
-                // Also show the section title
-                const sectionTitle = section.querySelector('.nav-section-title');
-                if (sectionTitle) {
-                    sectionTitle.style.display = 'block';
+            const sectionItem = document.querySelector('[data-section="' + sectionId + '"]');
+            if (sectionItem) {
+                const section = sectionItem.closest('.nav-section');
+                if (section) {
+                    section.style.display = 'block';
+                    section.classList.remove('search-filtered');
+                    
+                    // Also show the section title
+                    const sectionTitle = section.querySelector('.nav-section-title');
+                    if (sectionTitle) {
+                        sectionTitle.style.display = 'block';
+                    }
                 }
             }
         });
@@ -1217,12 +1034,7 @@ end) or logError("Failed to execute risky function", script.Name)
             document.getElementById('sidebarNav').appendChild(emptyState);
         }
         
-        emptyState.innerHTML = `
-            <div class="empty-state-content">
-                <p>No results found for "<strong>${query}</strong>"</p>
-                <small>Try a different search term or browse the navigation.</small>
-            </div>
-        `;
+        emptyState.innerHTML = '<div class="empty-state-content"><p>No results found for "<strong>' + query + '</strong>"</p><small>Try a different search term or browse the navigation.</small></div>';
         emptyState.style.display = 'block';
     }
 
@@ -1236,16 +1048,7 @@ end) or logError("Failed to execute risky function", script.Name)
     showError(message) {
         const content = document.getElementById('docsContent');
         if (content) {
-            content.innerHTML = `
-                <div class="error-container">
-                    <div class="error-icon">⚠️</div>
-                    <h2>Oops! Something went wrong</h2>
-                    <p class="error-message">${message}</p>
-                    <button class="retry-button" onclick="location.reload()">
-                        Retry
-                    </button>
-                </div>
-            `;
+            content.innerHTML = '<div class="error-container"><div class="error-icon">⚠️</div><h2>Oops! Something went wrong</h2><p class="error-message">' + message + '</p><button class="retry-button" onclick="location.reload()">Retry</button></div>';
         }
     }
 }
@@ -1265,7 +1068,7 @@ function initSmoothScrolling() {
                 const id = entry.target.id;
                 if (id && window.docsSystem) {
                     // Update active navigation without changing URL
-                    const navItem = document.querySelector(`[data-subsection="${id}"]`);
+                    const navItem = document.querySelector('[data-subsection="' + id + '"]');
                     if (navItem) {
                         document.querySelectorAll('.nav-item').forEach(item => {
                             item.classList.remove('active');
@@ -1349,12 +1152,12 @@ function optimizeForMobile() {
     // Prevent zoom on input focus (iOS Safari)
     document.addEventListener('touchstart', (e) => {
         if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
-            document.viewport = document.querySelector('meta[name="viewport"]');
-            if (document.viewport) {
-                document.viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
+            const viewport = document.querySelector('meta[name="viewport"]');
+            if (viewport) {
+                viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
                 
                 setTimeout(() => {
-                    document.viewport.setAttribute('content', 'width=device-width, initial-scale=1.0');
+                    viewport.setAttribute('content', 'width=device-width, initial-scale=1.0');
                 }, 1000);
             }
         }
