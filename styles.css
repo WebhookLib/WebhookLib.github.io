@@ -1,4 +1,263 @@
-/* Reset and base styles */
+@media (max-width: 768px) {
+    /* Navigation fixes */
+    .nav-links {
+        display: none;
+    }
+    
+    .mobile-menu-toggle {
+        display: flex;
+    }
+    
+    .mobile-sidebar-toggle {
+        display: flex;
+    }
+    
+    .nav-container {
+        padding: var(--spacing-md);
+        height: 73px;
+    }
+    
+    .logo-full {
+        display: none;
+    }
+    
+    .logo-icon {
+        display: block;
+        height: 40px;
+        width: auto;
+    }
+    
+    /* Mobile navigation positioning */
+    .mobile-nav {
+        top: 73px;
+        display: block;
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all var(--transition-normal);
+    }
+    
+    .mobile-nav.open {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    /* Documentation page specific */
+    .docs-container {
+        margin-top: 0;
+    }
+    
+    .docs-sidebar {
+        position: fixed;
+        top: 73px;
+        left: -100%;
+        width: 100%;
+        max-width: 320px;
+        height: calc(100vh - 73px);
+        z-index: 1200;
+        transition: left var(--transition-normal);
+        box-shadow: var(--shadow-xl);
+    }
+    
+    .docs-sidebar.open {
+        left: 0;
+    }
+    
+    .sidebar-overlay {
+        z-index: 1100;
+    }
+    
+    .sidebar-overlay.show {
+        display: block;
+    }
+    
+    /* Hide mobile menu toggle on docs pages, show sidebar toggle */
+    .docs-container ~ * .mobile-menu-toggle {
+        display: none;
+    }
+    
+    /* Hero section fixes */
+    .hero {
+        padding: var(--spacing-2xl) 0;
+    }
+    
+    .hero-container {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-xl);
+        text-align: center;
+        padding: 0 var(--spacing-md);
+    }
+    
+    .hero-title {
+        font-size: 2.25rem;
+        margin-bottom: var(--spacing-md);
+    }
+    
+    .hero-subtitle {
+        font-size: 1.125rem;
+    }
+    
+    .hero-description {
+        font-size: 1rem;
+        margin-bottom: var(--spacing-lg);
+    }
+    
+    .hero-buttons {
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--spacing-sm);
+    }
+    
+    .hero-buttons .btn {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    /* Features section fixes */
+    .features {
+        padding: var(--spacing-2xl) 0;
+    }
+    
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+        padding: 0 var(--spacing-md);
+    }
+    
+    .feature-card {
+        padding: var(--spacing-lg);
+    }
+    
+    /* Examples section fixes */
+    .examples {
+        padding: var(--spacing-2xl) 0;
+    }
+    
+    .examples-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+        padding: 0 var(--spacing-md);
+    }
+    
+    .example-card {
+        min-width: 0;
+        width: 100%;
+    }
+    
+    /* Code block fixes */
+    .code-header {
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+    
+    .code-block pre {
+        padding: var(--spacing-md);
+        font-size: 0.8rem;
+    }
+    
+    /* CTA section fixes */
+    .cta {
+        padding: var(--spacing-2xl) 0;
+    }
+    
+    .cta-content {
+        padding: 0 var(--spacing-md);
+    }
+    
+    .cta-content h2 {
+        font-size: 2rem;
+    }
+    
+    .cta-content p {
+        font-size: 1rem;
+    }
+    
+    /* Footer fixes */
+    .footer-content {
+        flex-direction: column;
+        gap: var(--spacing-lg);
+        text-align: center;
+        padding: 0 var(--spacing-md);
+        margin-bottom: var(--spacing-lg);
+    }
+    
+    .footer-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: var(--spacing-lg);
+    }
+    
+    .footer-bottom {
+        padding: var(--spacing-lg) var(--spacing-md) 0;
+    }
+    
+    .docs-content {
+        padding: var(--spacing-lg) var(--spacing-md);
+    }
+    
+    /* Typography fixes */
+    .section-title {
+        font-size: 2rem;
+        margin-bottom: var(--spacing-2xl);
+    }
+    
+    /* Button fixes */
+    .btn {
+        min-height: 48px;
+        padding: var(--spacing-md) var(--spacing-lg);
+        font-size: 0.95rem;
+    }
+    
+    .btn-large {
+        padding: var(--spacing-lg) var(--spacing-xl);
+        font-size: 1rem;
+    }
+    
+    /* Container padding fixes */
+    .container {
+        padding: 0 var(--spacing-md);
+    }
+    
+    /* Fix z-index issues */
+    .navbar {
+        z-index: 1000;
+    }
+    
+    .mobile-nav {
+        z-index: 999;
+    }
+    
+    .docs-sidebar {
+        z-index: 1200;
+    }
+    
+    .sidebar-overlay {
+        z-index: 1100;
+    }
+    
+    /* Improve mobile menu animations */
+    .mobile-nav {
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+    
+    /* Fix mobile navigation buttons */
+    .mobile-nav-buttons .theme-toggle {
+        width: 44px;
+        height: 44px;
+    }
+    
+    /* Ensure proper touch targets */
+    .nav-logo a {
+        min-height: 44px;
+        min-width: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+}
+    /* Reset and base styles */
 * {
     margin: 0;
     padding: 0;
@@ -129,7 +388,7 @@ a:hover {
     border-bottom: 1px solid var(--border-light);
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 1000;
     backdrop-filter: blur(10px);
     transition: all var(--transition-normal);
 }
@@ -142,6 +401,7 @@ a:hover {
     max-width: 1200px;
     margin: 0 auto;
     width: 100%;
+    position: relative;
 }
 
 .nav-logo {
@@ -150,6 +410,7 @@ a:hover {
     font-weight: 700;
     font-size: 1.25rem;
     color: var(--text-primary);
+    z-index: 1001;
 }
 
 .nav-logo a {
@@ -193,9 +454,10 @@ a:hover {
     display: flex;
     align-items: center;
     gap: var(--spacing-md);
+    z-index: 1001;
 }
 
-.theme-toggle, .github-btn {
+.theme-toggle, .github-btn, .mobile-sidebar-toggle {
     background: none;
     border: 2px solid var(--border-light);
     border-radius: 50%;
@@ -209,13 +471,14 @@ a:hover {
     flex-shrink: 0;
 }
 
-.theme-toggle:hover, .github-btn:hover {
+.theme-toggle:hover, .github-btn:hover, .mobile-sidebar-toggle:hover {
     border-color: var(--blue-500);
     background-color: var(--blue-50);
 }
 
 [data-theme="dark"] .theme-toggle:hover,
-[data-theme="dark"] .github-btn:hover {
+[data-theme="dark"] .github-btn:hover,
+[data-theme="dark"] .mobile-sidebar-toggle:hover {
     background-color: var(--blue-900);
 }
 
@@ -246,6 +509,10 @@ a:hover {
     background: none;
     border: none;
     flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
 }
 
 .mobile-menu-toggle span {
@@ -253,6 +520,7 @@ a:hover {
     height: 2px;
     background-color: var(--text-primary);
     transition: all var(--transition-fast);
+    border-radius: 1px;
 }
 
 .mobile-menu-toggle.active span:nth-child(1) {
@@ -267,29 +535,40 @@ a:hover {
     transform: rotate(-45deg) translate(7px, -6px);
 }
 
+.mobile-sidebar-toggle {
+    display: none;
+}
+
 .mobile-nav {
     display: none;
     position: fixed;
-    top: 100%;
+    top: 73px;
     left: 0;
     right: 0;
     background-color: var(--bg-primary);
     border-bottom: 1px solid var(--border-light);
     box-shadow: var(--shadow-lg);
-    z-index: 99;
+    z-index: 999;
     max-height: calc(100vh - 73px);
     overflow-y: auto;
+    transform: translateY(-100%);
+    transition: transform var(--transition-normal);
 }
 
 .mobile-nav.open {
     display: block;
+    transform: translateY(0);
+}
+
+.mobile-nav-content {
+    padding: var(--spacing-lg);
 }
 
 .mobile-nav-links {
     display: flex;
     flex-direction: column;
-    padding: var(--spacing-lg);
     gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
 }
 
 .mobile-nav-link {
@@ -298,19 +577,21 @@ a:hover {
     padding: var(--spacing-md);
     border-radius: 8px;
     transition: all var(--transition-fast);
-    text-align: center;
+    text-align: left;
+    border-left: 3px solid transparent;
 }
 
 .mobile-nav-link:hover {
     color: var(--text-primary);
     background-color: var(--bg-secondary);
+    border-left-color: var(--blue-500);
 }
 
 .mobile-nav-buttons {
     display: flex;
     justify-content: center;
     gap: var(--spacing-md);
-    padding-top: var(--spacing-md);
+    padding-top: var(--spacing-lg);
     border-top: 1px solid var(--border-light);
 }
 
