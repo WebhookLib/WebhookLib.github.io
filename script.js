@@ -814,7 +814,6 @@ highlightCode(code, language) {
             .replace(/\b\d+\.?\d*\b/g, '<span class="number">$&</span>');
     } else if (language === 'javascript' || language === 'js') {
         escaped = escaped
-            .replace(/\b(function|const|let|var|if|else|for|while|do|switch|case|break|continue|return|try|catch|finally|class|extends|import|export|default|async|await|true|false|null|undefined)\b/g, '$1')
             .replace(/(["'`])(?:\\.|(?!\1)[^\\])*?\1/g, '<span class="string">$&</span>')
             .replace(/(\/\/.*$|\/\*[\s\S]*?\*\/)/gm, '<span class="comment">$1</span>')
             .replace(/\b\d+\.?\d*\b/g, '<span class="number">$&</span>');
