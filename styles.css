@@ -62,6 +62,7 @@
 }
 
 /* Dark theme */
+/* Dark theme */
 [data-theme="dark"] {
     --bg-primary: #0f172a;
     --bg-secondary: #1e293b;
@@ -1486,30 +1487,6 @@ a:hover {
     html {
         scroll-behavior: auto;
     }
-}
-
-[data-theme="dark"] {
-    --bg-primary: #0f172a;
-    --bg-secondary: #1e293b;
-    --bg-tertiary: #334155;
-    --text-primary: #f1f5f9;
-    --text-secondary: #cbd5e1;
-    --text-tertiary: #94a3b8;
-    --border-light: #334155;
-    --border-medium: #475569;
-    
-    /* Dark mode code block colors - الآن بخلفية داكنة */
-    --code-bg: #1e293b;
-    --code-bg-secondary: #334155;
-    --code-text: #f1f5f9;
-    --code-border: #475569;
-    
-    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
-    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4);
-    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.4);
-    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.4), 0 8px 10px -6px rgb(0 0 0 / 0.4);
-    
-    --github-icon-filter: brightness(0) saturate(100%) invert(85%) sepia(8%) saturate(292%) hue-rotate(202deg) brightness(102%) contrast(93%);
 }
 
 
